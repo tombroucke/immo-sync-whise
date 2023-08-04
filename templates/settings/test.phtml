@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @var int $id
+ */
+?>
+<p id="<?php echo esc_attr($id); ?>">
+    <?php esc_html_e('Manage testing settings for the Whise API here.', 'immo-sync-whise'); ?>
+    <?php printf(
+        __('Test and debug mode can be enabled using the <code>%s</code> and <code>%s</code> constants in <code>wp-config.php</code>.', 'immo-sync-whise'),
+        'IWS_TEST_MODE',
+        'IWS_DEBUG'
+    ); ?>
+</p>

@@ -1,0 +1,26 @@
+<?php
+
+use Bruno\ImmoSyncWhise\Admin\Settings;
+
+$tab = $_GET['tab'] ?? 'settings';
+$page = esc_attr(Settings::PAGE_SLUG);
+?>
+<div class="wrap">
+    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+
+    <nav class="nav-tab-wrapper">
+        <a href="?page=<?= $page ?>&tab=settings" class="nav-tab <?= ($tab === 'settings') ? 'nav-tab-active' : '' ?>">
+            <?= __('Settings', 'immo-sync-whise') ?>
+        </a>
+    </nav>
+
+    <div class="tab-content">
+        <form action="options.php" method="post">
+            <?php
+            settings_fields(Settings::PAGE_SLUG);
+            do_settings_sections(Settings::PAGE_SLUG);
+            submit_button(__('Save'));
+            ?>
+        </form>
+    </div>
+</div>
