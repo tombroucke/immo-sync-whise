@@ -58,7 +58,7 @@ class EstateParser extends Parser
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
 
-            $this->operationsLogger->error("There was an error when saving estate pictures {$error} for {$this->postId}");
+            $this->logger->error("There was an error when saving estate pictures {$error} for {$this->postId}");
         }
     }
 
@@ -83,7 +83,7 @@ class EstateParser extends Parser
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
 
-            $this->operationsLogger->error("There was an error when saving estate details {$error} for {$this->postId}");
+            $this->logger->error("There was an error when saving estate details {$error} for {$this->postId}");
         }
     }
 
