@@ -2,9 +2,12 @@
 
 namespace ADB\ImmoSyncWhise;
 
+use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Api;
-use League\Container\Container as ContainerD;
+use ADB\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Parser\EstateParser;
+use League\Container\Container as LeagueContainer;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -13,11 +16,12 @@ use Whise\Api\WhiseApi;
 class Container
 {
     private static $instance = null;
+
     private $container;
 
     private function __construct()
     {
-        $this->container = new ContainerD();
+        $this->container = new LeagueContainer();
     }
 
     public static function getInstance()
@@ -40,14 +44,20 @@ class Container
 
         self::getInstance()->add('logger', $logger);
         self::getInstance()->add('operations', $operationsLogger);
-        self::getInstance()->add(Model\Estate::class, new Model\Estate($operationsLogger));
+
+        self::getInstance()->add(Estate::class, fn () => new Estate(logger: $operationsLogger));
+        self::getInstance()->add(EstateParser::class, fn () => new EstateParser(logger: $operationsLogger));
+
         self::getInstance()->add(
-            Adapter\EstateAdapter::class,
-            new Adapter\EstateAdapter(
-                new Api(new WhiseApi(), Settings::getSetting('whise_user'), Settings::getSetting('whise_password'))
+            EstateAdapter::class,
+            new EstateAdapter(
+                new Api(
+                    connection: new WhiseApi(),
+                    whiseUser: Settings::getSetting('whise_user'),
+                    whisePassword: Settings::getSetting('whise_password')
+                )
             )
         );
-        self::getInstance()->add(Parser\EstateParser::class, new Parser\EstateParser($operationsLogger));
     }
 
     public function add(string $alias, $concrete)
