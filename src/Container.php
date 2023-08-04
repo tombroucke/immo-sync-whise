@@ -34,30 +34,26 @@ class Container
         return self::$instance;
     }
 
-    public static function addDependencies()
+    public function addDependencies()
     {
-        $logger = (new Logger('normal_log'))
-            ->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log', Level::Debug));
+        $dependencies = [
+            'logger' => (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log', Level::Debug)),
+            'operations' => (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log', Level::Debug)),
 
-        $operationsLogger = (new Logger('operations'))
-            ->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log', Level::Debug));
-
-        self::getInstance()->add('logger', $logger);
-        self::getInstance()->add('operations', $operationsLogger);
-
-        self::getInstance()->add(Estate::class, fn () => new Estate(logger: $operationsLogger));
-        self::getInstance()->add(EstateParser::class, fn () => new EstateParser(logger: $operationsLogger));
-
-        self::getInstance()->add(
-            EstateAdapter::class,
-            new EstateAdapter(
+            Estate::class => fn () => new Estate(logger: $this->container->get('logger')),
+            EstateParser::class => fn () => new EstateParser(logger: $this->container->get('operations')),
+            EstateAdapter::class => new EstateAdapter(
                 new Api(
                     connection: new WhiseApi(),
                     whiseUser: Settings::getSetting('whise_user'),
                     whisePassword: Settings::getSetting('whise_password')
                 )
             )
-        );
+        ];
+
+        foreach ($dependencies as $alias => $concrete) {
+            $this->container->add($alias, $concrete);
+        }
     }
 
     public function add(string $alias, $concrete)
