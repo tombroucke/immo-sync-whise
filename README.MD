@@ -56,3 +56,7 @@ sting section, developers and contributors will have clear instructions on how t
 ## License
 
 This plugin is licensed under the [MIT License](LICENSE). Feel free to modify and distribute it as needed.
+
+## Thanks
+
+Special thanks to fw4, this WordPress plugin leverages [their package](https://github.com/fw4-bvba/whise-api) under the hood.
