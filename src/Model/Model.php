@@ -2,14 +2,14 @@
 
 namespace ADB\ImmoSyncWhise\Model;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 abstract class Model
 {
-    public $operationsLogger;
+    public $logger;
 
-    public function __construct(Logger $operationsLogger)
+    public function __construct(LoggerInterface $logger)
     {
-        $this->operationsLogger = $operationsLogger;
+        $this->logger = $logger;
     }
 }

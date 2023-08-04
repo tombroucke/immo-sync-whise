@@ -2,14 +2,14 @@
 
 namespace ADB\ImmoSyncWhise\Parser;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 abstract class Parser
 {
-    public $operationsLogger;
+    public $logger;
 
-    public function __construct(Logger $operationsLogger)
+    public function __construct(LoggerInterface $logger)
     {
-        $this->operationsLogger = $operationsLogger;
+        $this->logger = $logger;
     }
 }
