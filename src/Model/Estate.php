@@ -90,7 +90,7 @@ class Estate extends Model
         } catch (Throwable  $e) {
             $error = json_encode($e->getMessage());
 
-            $this->operationsLogger->error("There was an error when verifying if the property already exists {$error}");
+            $this->logger->error("There was an error when verifying if the property already exists {$error}");
         }
     }
 }
