@@ -1,11 +1,14 @@
 <?php
 
-use Bruno\ImmoSyncWhise\Model\Estate;
-use Bruno\ImmoSyncWhise\Model\EstateMatcher;
+use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Model\EstateMatcher;
 
 global $post;
 
-$fields = (new Estate())->getIwsMetaFields($post->ID);
+$operationsLogger = Container::getInstance()->get('operations');
+
+$fields = (new Estate($operationsLogger))->getIwsMetaFields($post->ID);
 $matcher = new EstateMatcher();
 
 ?>

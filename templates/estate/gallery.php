@@ -1,10 +1,13 @@
 <?php
 
-use Bruno\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Model\Estate;
 
 global $post;
 
-$estate = (new Estate())->get_estate($post->ID);
+$operationsLogger = Container::getInstance()->get('operations');
+
+$estate = (new Estate($operationsLogger))->get_estate($post->ID);
 
 ?>
 <div id="product_images_container">
