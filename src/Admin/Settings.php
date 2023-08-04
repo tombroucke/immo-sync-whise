@@ -38,7 +38,7 @@ class Settings
 
         add_settings_section(
             'iws_api_creds',
-            __('API Credentials', 'immo-sync-whise'),
+            __('WHISE Credentials', 'immo-sync-whise'),
             function ($args) {
                 echo Plugin::render('settings/credentials', $args);
             },
@@ -46,55 +46,46 @@ class Settings
         );
 
         add_settings_field(
-            'api_token',
-            __('API Token', 'immo-sync-whise'),
+            'whise_user',
+            __('WHISE User', 'immo-sync-whise'),
             static function ($args) {
                 echo Plugin::render('settings/field/input', [
                     'atts' => [
-                        'type' => 'password',
-                        'name' => static::getOptionName('api_token'),
-                        'value' => static::getOptionValue('api_token'),
+                        'type' => 'text',
+                        'name' => static::getOptionName('whise_user'),
+                        'value' => static::getOptionValue('whise_user'),
                     ],
                     'args' => $args,
-                    'description' => __('The access token used to authenticate with the Whise API.', 'immo-sync-whise'),
+                    'description' => __('The username or email address used to authenticate with the Whise API.', 'immo-sync-whise'),
                 ]);
             },
             self::PAGE_SLUG,
             'iws_api_creds',
             [
                 'class' => 'wporg_row',
-                'label_for' => 'api_token',
+                'label_for' => 'whise_user',
             ]
         );
 
-        add_settings_section(
-            'isw_test_api_creds',
-            __('API Test Credentials', 'immo-sync-whise'),
-            function ($args) {
-                echo Plugin::render('settings/test', $args);
-            },
-            self::PAGE_SLUG
-        );
-
         add_settings_field(
-            'test_api_token',
-            __('API Token', 'immo-sync-whise'),
+            'whise_password',
+            __('WHISE Password', 'immo-sync-whise'),
             static function ($args) {
                 echo Plugin::render('settings/field/input', [
                     'atts' => [
                         'type' => 'password',
-                        'name' => static::getOptionName('test_api_token'),
-                        'value' => static::getOptionValue('test_api_token'),
+                        'name' => static::getOptionName('whise_password'),
+                        'value' => static::getOptionValue('whise_password'),
                     ],
                     'args' => $args,
-                    'description' => __('The access token used to authenticate with the test sandbox for the Whise API.', 'immo-sync-whise'),
+                    'description' => __('The password used to authenticate with the Whise API.', 'immo-sync-whise'),
                 ]);
             },
             self::PAGE_SLUG,
-            'isw_test_api_creds',
+            'iws_api_creds',
             [
                 'class' => 'wporg_row',
-                'label_for' => 'test_api_token',
+                'label_for' => 'whise_password',
             ]
         );
     }

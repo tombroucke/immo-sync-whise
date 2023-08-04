@@ -17,12 +17,10 @@ ImmoSyncWhise is a WordPress plugin that allows you to synchronize real estate l
 The following configuration options must be set in the `.env` file located in the root directory of your WordPress installation:
 
 ```
-WHISE_USER="<Your_Whise_Username>"
-WHISE_PASSWORD="<Your_Whise_Password>"
 LANG="nl-BE"
 ```
 
-Make sure to replace `<Your_Whise_Username>` and `<Your_Whise_Password>` with your actual Whise account credentials. The `LANG` option represents the desired language for the Whise integration (e.g., "nl-BE" for Dutch - Belgium).
+The `LANG` option represents the desired language for the Whise integration (e.g., "nl-BE" for Dutch - Belgium).
 
 ## Testing (PHPUnit)
 

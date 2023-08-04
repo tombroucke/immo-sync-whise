@@ -2,6 +2,7 @@
 
 namespace ADB\ImmoSyncWhise;
 
+use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Api;
 use League\Container\Container as ContainerD;
 use Monolog\Handler\StreamHandler;
@@ -40,7 +41,12 @@ class Container
         self::getInstance()->add('logger', $logger);
         self::getInstance()->add('operations', $operationsLogger);
         self::getInstance()->add(Model\Estate::class, new Model\Estate($operationsLogger));
-        self::getInstance()->add(Adapter\EstateAdapter::class, new Adapter\EstateAdapter(new Api(new WhiseApi(), $_ENV['WHISE_USER'], $_ENV['WHISE_PASSWORD'])));
+        self::getInstance()->add(
+            Adapter\EstateAdapter::class,
+            new Adapter\EstateAdapter(
+                new Api(new WhiseApi(), Settings::getSetting('whise_user'), Settings::getSetting('whise_password'))
+            )
+        );
         self::getInstance()->add(Parser\EstateParser::class, new Parser\EstateParser($operationsLogger));
     }
 
