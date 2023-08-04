@@ -1,9 +1,9 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Model;
+namespace ADB\ImmoSyncWhise\Model;
 
-use Bruno\ImmoSyncWhise\Enum\PostType;
-use Bruno\ImmoSyncWhise\Model\Model;
+use ADB\ImmoSyncWhise\Enum\PostType;
+use ADB\ImmoSyncWhise\Model\Model;
 use Throwable;
 
 class Estate extends Model

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Parser;
+namespace ADB\ImmoSyncWhise\Parser;
 
-use Bruno\ImmoSyncWhise\Database\IwsDetailsTable;
+use ADB\ImmoSyncWhise\Database\IwsDetailsTable;
 use Throwable;
 use Whise\Api\Response\ResponseObject;
 

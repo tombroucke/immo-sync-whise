@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Lookup;
+namespace ADB\ImmoSyncWhise\Lookup;
 
 class SubCategory
 {

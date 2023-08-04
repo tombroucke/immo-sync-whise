@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Command;
+namespace ADB\ImmoSyncWhise\Command;
 
-use Bruno\ImmoSyncWhise\Command\Command;
+use ADB\ImmoSyncWhise\Command\Command;
 
 class Fetch extends Command
 {

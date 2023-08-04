@@ -1,9 +1,9 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Command;
+namespace ADB\ImmoSyncWhise\Command;
 
-use Bruno\ImmoSyncWhise\Command\Command;
-use Bruno\ImmoSyncWhise\Enum\PostType;
+use ADB\ImmoSyncWhise\Command\Command;
+use ADB\ImmoSyncWhise\Enum\PostType;
 use Illuminate\Support\Collection;
 
 class Sync extends Command

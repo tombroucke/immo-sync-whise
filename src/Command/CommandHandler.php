@@ -1,11 +1,10 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Command;
+namespace ADB\ImmoSyncWhise\Command;
 
-use Bruno\ImmoSyncWhise\Command\Fetch;
-use Bruno\ImmoSyncWhise\Command\Import;
-use Bruno\ImmoSyncWhise\Command\Sync;
-use Bruno\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Command\Fetch;
+use ADB\ImmoSyncWhise\Command\Sync;
+use ADB\ImmoSyncWhise\Container;
 
 class CommandHandler
 {

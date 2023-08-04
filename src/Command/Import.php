@@ -1,10 +1,10 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Command;
+namespace ADB\ImmoSyncWhise\Command;
 
-use Bruno\ImmoSyncWhise\Adapter\EstateAdapter;
-use Bruno\ImmoSyncWhise\Container;
-use Bruno\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
+use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Model\Estate;
 
 class Import extends Command
 {

@@ -1,8 +1,8 @@
 {
-    "name": "bruno/immo-sync-whise",
+    "name": "adb/immo-sync-whise",
     "autoload": {
         "psr-4": {
-            "Bruno\\ImmoSyncWhise\\": "src/"
+            "ADB\\ImmoSyncWhise\\": "src/"
         }
     },
     "authors": [
@@ -19,6 +19,7 @@
         "vlucas/phpdotenv": "^5.5",
         "monolog/monolog": "^3.3",
         "league/container": "^4.2",
-        "illuminate/collections": "^10.0"
+        "illuminate/collections": "^10.0",
+        "phpunit/phpunit": "^10.3"
     }
 }

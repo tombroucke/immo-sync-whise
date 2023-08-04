@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Model;
+namespace ADB\ImmoSyncWhise\Model;
 
 use Monolog\Logger;
 

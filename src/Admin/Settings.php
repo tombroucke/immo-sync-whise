@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Admin;
+namespace ADB\ImmoSyncWhise\Admin;
 
-use Bruno\ImmoSyncWhise\Plugin;
+use ADB\ImmoSyncWhise\Plugin;
 
 class Settings
 {

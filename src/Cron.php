@@ -1,9 +1,9 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise;
+namespace ADB\ImmoSyncWhise;
 
-use Bruno\ImmoSyncWhise\Controller\EstateController;
-use Bruno\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Controller\EstateController;
+use ADB\ImmoSyncWhise\Model\Estate;
 
 class Cron
 {

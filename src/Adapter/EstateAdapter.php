@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Adapter;
+namespace ADB\ImmoSyncWhise\Adapter;
 
-use Bruno\ImmoSyncWhise\Api;
+use ADB\ImmoSyncWhise\Api;
 
 class EstateAdapter
 {

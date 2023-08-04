@@ -1,14 +1,14 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Model;
+namespace ADB\ImmoSyncWhise\Model;
 
-use Bruno\ImmoSyncWhise\Lookup\Category;
-use Bruno\ImmoSyncWhise\Lookup\Country;
-use Bruno\ImmoSyncWhise\Lookup\DisplayStatus;
-use Bruno\ImmoSyncWhise\Lookup\Purpose;
-use Bruno\ImmoSyncWhise\Lookup\PurposeStatus;
-use Bruno\ImmoSyncWhise\Lookup\Status;
-use Bruno\ImmoSyncWhise\Lookup\SubCategory;
+use ADB\ImmoSyncWhise\Lookup\Category;
+use ADB\ImmoSyncWhise\Lookup\Country;
+use ADB\ImmoSyncWhise\Lookup\DisplayStatus;
+use ADB\ImmoSyncWhise\Lookup\Purpose;
+use ADB\ImmoSyncWhise\Lookup\PurposeStatus;
+use ADB\ImmoSyncWhise\Lookup\Status;
+use ADB\ImmoSyncWhise\Lookup\SubCategory;
 use DateTime;
 
 class EstateMatcher

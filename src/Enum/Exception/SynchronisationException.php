@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Exception;
+namespace ADB\ImmoSyncWhise\Exception;
 
 class SynchronisationException extends \RuntimeException
 {

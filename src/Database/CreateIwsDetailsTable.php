@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Database;
+namespace ADB\ImmoSyncWhise\Database;
 
 class CreateIwsDetailsTable
 {

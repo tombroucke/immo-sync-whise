@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Admin\CPT;
+namespace ADB\ImmoSyncWhise\Admin\CPT;
 
-use Bruno\ImmoSyncWhise\Enum\PostType;
+use ADB\ImmoSyncWhise\Enum\PostType;
 
 class Estate
 {

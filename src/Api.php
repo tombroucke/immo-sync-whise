@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise;
+namespace ADB\ImmoSyncWhise;
 
 use Whise\Api\WhiseApi;
 

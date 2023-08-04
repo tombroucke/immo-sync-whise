@@ -1,8 +1,8 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise;
+namespace ADB\ImmoSyncWhise;
 
-use Bruno\ImmoSyncWhise\Api;
+use ADB\ImmoSyncWhise\Api;
 use League\Container\Container as ContainerD;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;

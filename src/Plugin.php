@@ -1,11 +1,11 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise;
+namespace ADB\ImmoSyncWhise;
 
-use Bruno\ImmoSyncWhise\Admin\CPT\Estate;
-use Bruno\ImmoSyncWhise\Admin\Settings;
-use Bruno\ImmoSyncWhise\Command\CommandHandler;
-use Bruno\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Admin\CPT\Estate;
+use ADB\ImmoSyncWhise\Admin\Settings;
+use ADB\ImmoSyncWhise\Command\CommandHandler;
+use ADB\ImmoSyncWhise\Container;
 
 class Plugin
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bruno\ImmoSyncWhise\Enum;
+namespace ADB\ImmoSyncWhise\Enum;
 
 final class PostType
 {

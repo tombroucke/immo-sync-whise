@@ -2,13 +2,13 @@
 
 /*
  * Plugin Name:       Immo Sync Whise
- * Plugin URI:        https://www.bruno-agency.be
+ * Plugin URI:        
  * Description:       Integrates the Whise API with WordPress
  * Version:           1.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            De Belser Arne
- * Author URI:        https://www.bruno-agency.be
+ * Author URI:        
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       immo-sync-whise
@@ -17,8 +17,8 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Bruno\ImmoSyncWhise\Database\CreateIwsDetailsTable;
-use Bruno\ImmoSyncWhise\Plugin;
+use ADB\ImmoSyncWhise\Database\CreateIwsDetailsTable;
+use ADB\ImmoSyncWhise\Plugin;
 use Dotenv\Dotenv;
 
 define('ISW_VERSION', fileatime(__DIR__));
