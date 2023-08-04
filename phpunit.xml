@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <testsuite name="Plugin Tests">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <!-- Configuration for WordPress -->
+  <php>
+    <!-- Replace with the path to your WordPress installation -->
+    <const name="ABSPATH" value="/path/to/wordpress/"/>
+    <!-- Define testing environment constants -->
+    <const name="IWS_TEST_MODE" value="true"/>
+    <!-- Add any other constants you need for testing here -->
+    <!-- Set error reporting to maximum to catch all errors -->
+    <ini name="error_reporting" value="-1"/>
+    <!-- Define any other necessary PHP settings for testing -->
+    <!-- For example, setting memory_limit -->
+    <!-- <ini name="memory_limit" value="512M" /> -->
+  </php>
+</phpunit>
