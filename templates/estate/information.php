@@ -6,9 +6,7 @@ use ADB\ImmoSyncWhise\Model\EstateMatcher;
 
 global $post;
 
-$operationsLogger = Container::getInstance()->get('operations');
-
-$fields = (new Estate($operationsLogger))->getIwsMetaFields($post->ID);
+$fields = Container::getInstance()->get(Estate::class)->getIwsMetaFields($post->ID);
 $matcher = new EstateMatcher();
 
 ?>
