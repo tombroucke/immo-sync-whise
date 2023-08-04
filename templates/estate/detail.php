@@ -1,6 +1,6 @@
 <?php
 
-use Bruno\ImmoSyncWhise\Database\IwsDetailsTable;
+use ADB\ImmoSyncWhise\Database\IwsDetailsTable;
 
 global $post;
 
