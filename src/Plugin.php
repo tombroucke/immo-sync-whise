@@ -22,8 +22,8 @@ class Plugin
 
         $this->modules = [
             new CommandHandler($container),
-            new Settings($container),
-            new Estate($container),
+            new Settings(),
+            new Estate(),
         ];
     }
 
