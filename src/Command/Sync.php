@@ -28,12 +28,7 @@ class Sync extends Command
         ]);
 
         foreach ($estates as $estate) {
-            if ($this->estate->exists($estate->getData()['id'])) { // Update estate if already exists
-                $this->handleUpdate($estate);
-            } else { // Save new estate if not yet exists
-                $this->handleSave($estate);
-            }
-
+            $this->estate->exists($estate->getData()['id']) ? $this->handleUpdate($estate) : $this->handleSave($estate);
             // $this->logger->warning(json_encode($estate->getData()['name']));
             // $this->logger->warning(json_encode($estate->getData()['updateDateTime']));
         }
