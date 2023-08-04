@@ -6,3 +6,5 @@ composer.lock
 src/logs/operations.log
 .phpunit.result.cache
 phpunit.xml.bak
+/.phpunit.cache\test-results
+.phpunit.cache/test-results
