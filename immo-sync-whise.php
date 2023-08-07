@@ -6,7 +6,7 @@
  * Description:       Integrates the Whise API with WordPress
  * Version:           1.0
  * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires PHP:      7.3
  * Author:            De Belser Arne
  * Author URI:        
  * License:           GPL v2 or later
