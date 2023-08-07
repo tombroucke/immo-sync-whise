@@ -25,8 +25,26 @@ define('ISW_VERSION', fileatime(__DIR__));
 define('ISW_PATH', __DIR__);
 define('PLUGIN__FILE__', __FILE__);
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+/*
+$dotenv_file = __DIR__ . '/.env';
+
+try {
+    if (!file_exists($dotenv_file)) {
+        throw new Exception('.env file not found');
+    }
+
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+} catch (Exception $e) {
+    // Display a WordPress error notice
+    add_action('admin_notices', 'display_missing_env_file_notice');
+
+    function display_missing_env_file_notice()
+    {
+        echo '<div class="error"><p><strong>Warning:</strong> The ".env" file is missing. Please create it to configure the environment.</p></div>';
+    }
+}
+*/
 
 new CreateIwsDetailsTable();
 
