@@ -16,7 +16,7 @@ class Plugin
         add_action('plugins_loaded', [$this, 'initModules']);
     }
 
-    public function initModules()
+    public function initModules(): void
     {
         $container = Container::getInstance();
 
@@ -27,7 +27,7 @@ class Plugin
         ];
     }
 
-    public static function render(string $template, $context = [])
+    public static function render(string $template, array $context = []): string|null
     {
         $templateFolder = ISW_PATH . '/templates/';
         $templateFile = $templateFolder . $template . '.phtml';
