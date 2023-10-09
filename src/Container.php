@@ -24,7 +24,7 @@ class Container
         $this->container = new LeagueContainer();
     }
 
-    public static function getInstance()
+    public static function getInstance(): Container
     {
         if (self::$instance == null) {
             self::$instance = new self();
@@ -34,7 +34,7 @@ class Container
         return self::$instance;
     }
 
-    public function addDependencies()
+    public function addDependencies(): void
     {
         $dependencies = [
             'logger' => (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log', Level::Debug)),
