@@ -27,7 +27,7 @@ abstract class Command implements CommandContract
         $this->operationsLogger = $container->get('operations');
     }
 
-    public function handle(Model $model): void
+    public function handle(): void
     {
     }
 }

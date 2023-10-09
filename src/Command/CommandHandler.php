@@ -3,8 +3,8 @@
 namespace ADB\ImmoSyncWhise\Command;
 
 use ADB\ImmoSyncWhise\Command\Fetch;
-use ADB\ImmoSyncWhise\Command\Sync;
 use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Services\EstateSyncService;
 
 class CommandHandler
 {
@@ -14,13 +14,16 @@ class CommandHandler
     {
         if (defined('WP_CLI') && WP_CLI) {
             $this->commands = array_map(
-                function ($className) use ($container) {
-                    return \WP_CLI::add_command($className::COMMAND_NAME, new $className($container));
+                function ($className, $params) use ($container) {
+                    return \WP_CLI::add_command(
+                        $className::COMMAND_NAME,
+                        function () use ($className, $container, $params) {
+                            return new $className($container->get('operations'), ...$params);
+                        }
+                    );
                 },
                 [
-                    // Import::class,
-                    Fetch::class,
-                    // Sync::class,
+                    Fetch::class => [$container->get(EstateSyncService::class)],
                 ]
             );
         }
