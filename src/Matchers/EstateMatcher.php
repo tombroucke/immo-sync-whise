@@ -9,9 +9,10 @@ use ADB\ImmoSyncWhise\Lookup\Purpose;
 use ADB\ImmoSyncWhise\Lookup\PurposeStatus;
 use ADB\ImmoSyncWhise\Lookup\Status;
 use ADB\ImmoSyncWhise\Lookup\SubCategory;
+use ADB\ImmoSyncWhise\Matchers\Contracts\MatcherContract;
 use DateTime;
 
-class EstateMatcher
+class EstateMatcher implements MatcherContract
 {
     public $lookups = [
         '_iws_displayStatusId' => DisplayStatus::class,
@@ -142,12 +143,12 @@ class EstateMatcher
         ];
     }
 
-    public function getTitle($key)
+    public function getTitle(string $key)
     {
         return array_key_exists($key, $this->titles) ? $this->titles[$key] : 'Undefined';
     }
 
-    public function getDescription($key)
+    public function getDescription(string $key)
     {
         return array_key_exists($key, $this->descriptions) ? $this->descriptions[$key] : '';
     }
@@ -180,7 +181,7 @@ class EstateMatcher
         }
     }
 
-    private function getFieldValueFromLookup($key, $field)
+    public function getFieldValueFromLookup($key, $field)
     {
         $class = new $this->lookups[$key];
         $key = array_search($field, array_column($class->lookup, 'id'));
