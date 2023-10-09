@@ -2,65 +2,41 @@
 
 namespace ADB\ImmoSyncWhise\Command;
 
-use ADB\ImmoSyncWhise\Command\Command;
+use ADB\ImmoSyncWhise\Services\EstateSyncService;
 
-class Fetch extends Command
+class Fetch
 {
-    public const COMMAND_NAME = 'iws fetch';
+    public const COMMAND_NAME = 'iws fetch-all';
+
+    private $estateSyncService;
+
+    public function __construct(EstateSyncService $estateSyncService)
+    {
+        $this->estateSyncService = $estateSyncService;
+    }
+
+    /**
+     *
+     * wp iws fetch-all handle
+     */
+    public function handle(): void
+    {
+        $this->estateSyncService->syncAllEstates();
+    }
 
     /**
      *
      * wp iws fetch get
      */
-    public function get($args)
-    {
-        \WP_CLI::log("Fetching estate with ID {$args[0]} from Whise API");
-        $this->operationsLogger->info("Fetching estate with ID {$args[0]} from Whise API");
+    // public function get($args)
+    // {
+    //     \WP_CLI::log("Fetching estate with ID {$args[0]} from Whise API");
+    //     $this->operationsLogger->info("Fetching estate with ID {$args[0]} from Whise API");
 
-        $estate = $this->estateAdapter->get($args[0], ['LanguageId' => $_ENV['LANG']]);
-        $this->handle($estate);
+    //     $estate = $this->estateAdapter->get($args[0], ['LanguageId' => $_ENV['LANG']]);
+    //     $this->handle($estate);
 
-        \WP_CLI::success("Fetching successful");
-        $this->operationsLogger->info("Fetching successful");
-    }
-
-    /**
-     *
-     * wp iws fetch all
-     */
-    public function all()
-    {
-        \WP_CLI::log("Fetching all estates from Whise API");
-        $this->operationsLogger->info("Fetching all estates from Whise API");
-
-        $estates = $this->estateAdapter->list([
-            'LanguageId' => $_ENV['LANG'],
-        ]);
-
-        foreach ($estates as $estate) {
-            $this->handle($estate);
-        }
-
-        \WP_CLI::success('Fetching successful');
-        $this->operationsLogger->info("Fetching successful");
-    }
-
-    private function handle($model)
-    {
-        // Save the Post
-        $postId = $this->estate->save($model);
-
-        // Configure the parsers
-        $this->estateParser->setMethod('add_post_meta');
-        $this->estateParser->setPostId($postId);
-        $this->estateParser->setObject($model);
-
-        // Parse the response object
-        $this->estateParser->parseProperties();
-        $this->estateParser->parseDetails();
-        $this->estateParser->parsePictures();
-
-        \WP_CLI::success("Fetched estate, created post {$postId}");
-        $this->operationsLogger->info("Fetched estate, created post {$postId}");
-    }
+    //     \WP_CLI::success("Fetching successful");
+    //     $this->operationsLogger->info("Fetching successful");
+    // }
 }
