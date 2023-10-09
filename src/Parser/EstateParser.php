@@ -24,7 +24,7 @@ class EstateParser extends Parser
         $this->postId = $postId;
     }
 
-    public function setEstateObject(ResponseObject $response): void
+    public function setObject(ResponseObject $response): void
     {
         $this->estateResponse = $response;
     }
