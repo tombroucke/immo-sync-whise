@@ -20,7 +20,7 @@ class CommandHandler
                 [
                     // Import::class,
                     Fetch::class,
-                    Sync::class,
+                    // Sync::class,
                 ]
             );
         }
