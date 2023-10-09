@@ -5,21 +5,22 @@ namespace ADB\ImmoSyncWhise\Services;
 use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
-use ADB\ImmoSyncWhise\Services\Service;
+use Psr\Log\LoggerInterface;
 
-class EstateSyncService extends Service
+class EstateSyncService
 {
     public function __construct(
         private Estate $estate,
         private EstateAdapter $estateAdapter,
-        private EstateParser $estateParser
+        private EstateParser $estateParser,
+        public LoggerInterface $logger,
     ) {
     }
 
-    public function syncAllEstates(): void
+    public function syncAll(): void
     {
         \WP_CLI::log("Fetching all estates from Whise API");
-        $this->operationsLogger->info("Fetching all estates from Whise API");
+        $this->logger->info("Fetching all estates from Whise API");
 
         $estates = $this->estateAdapter->list([
             'LanguageId' => $_ENV['LANG'],
@@ -27,12 +28,12 @@ class EstateSyncService extends Service
 
         foreach ($estates as $estate) {
             // Save the Post
-            $postId = $this->estate->save($model);
+            $postId = $this->estate->save($estate);
 
-            // Configure the parsers
+            // Configure the parser
             $this->estateParser->setMethod('add_post_meta');
             $this->estateParser->setPostId($postId);
-            $this->estateParser->setObject($model);
+            $this->estateParser->setObject($estate);
 
             // Parse the response object
             $this->estateParser->parseProperties();
@@ -40,10 +41,10 @@ class EstateSyncService extends Service
             $this->estateParser->parsePictures();
 
             \WP_CLI::success("Fetched estate, created post {$postId}");
-            $this->operationsLogger->info("Fetched estate, created post {$postId}");
+            $this->logger->info("Fetched estate, created post {$postId}");
         }
 
         \WP_CLI::success('Fetching successful');
-        $this->operationsLogger->info("Fetching successful");
+        $this->logger->info("Fetching successful");
     }
 }
