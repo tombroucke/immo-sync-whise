@@ -3,11 +3,16 @@
 namespace ADB\ImmoSyncWhise\Model;
 
 use ADB\ImmoSyncWhise\Enum\PostType;
-use ADB\ImmoSyncWhise\Model\Model;
+use ADB\ImmoSyncWhise\Model\Contracts\ModelContract;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
-class Estate extends Model
+class Estate implements ModelContract
 {
+    public function __construct(public LoggerInterface $logger)
+    {
+    }
+
     public function get_estate($postId): \WP_Post|array|null
     {
         return get_post($postId);

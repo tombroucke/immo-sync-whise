@@ -3,16 +3,20 @@
 namespace ADB\ImmoSyncWhise\Parser;
 
 use ADB\ImmoSyncWhise\Database\Database;
+use Psr\Log\LoggerInterface;
 use Throwable;
-use Whise\Api\Response\ResponseObject;
 
-class EstateParser extends Parser
+class EstateParser
 {
     public $method;
 
     public $postId;
 
     public $estateResponse;
+
+    public function __construct(public LoggerInterface $logger)
+    {
+    }
 
     public function setMethod(string $method): void
     {
@@ -24,7 +28,7 @@ class EstateParser extends Parser
         $this->postId = $postId;
     }
 
-    public function setObject(ResponseObject $response): void
+    public function setObject($response): void
     {
         $this->estateResponse = $response;
     }
