@@ -3,12 +3,13 @@
 namespace ADB\ImmoSyncWhise\Command;
 
 use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
+use ADB\ImmoSyncWhise\Command\Contracts\CommandContract;
 use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use Psr\Log\LoggerInterface;
 
-abstract class Command
+abstract class Command implements CommandContract
 {
     protected Estate $estate;
     protected EstateAdapter $estateAdapter;
@@ -23,5 +24,9 @@ abstract class Command
         $this->estateParser     = $container->make(EstateParser::class);
         $this->logger           = $container->get('logger');
         $this->operationsLogger = $container->get('operations');
+    }
+
+    public function handle($model)
+    {
     }
 }
