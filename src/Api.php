@@ -10,7 +10,7 @@ class Api
 {
     public WhiseApi $connection;
 
-    public function __construct(WhiseApi $connection, $whiseUser, $whisePassword)
+    public function __construct(WhiseApi $connection, string $whiseUser, string $whisePassword)
     {
         $this->connection = $connection;
 
@@ -29,7 +29,7 @@ class Api
         }
     }
 
-    public function unauthorizedMessage()
+    public function unauthorizedMessage(): void
     {
 ?>
         <div class="notice notice-error">
@@ -38,7 +38,7 @@ class Api
     <?php
     }
 
-    public function unauthorizedMessageDatabase()
+    public function unauthorizedMessageDatabase(): void
     {
     ?>
         <div class="notice notice-error">
@@ -54,7 +54,7 @@ class Api
 <?php
     }
 
-    private function areWhiseCredentialsSet()
+    private function areWhiseCredentialsSet(): bool
     {
         return !empty(get_option('isw_options')['whise_user']) && !empty(get_option('isw_options')['whise_password']);
     }
