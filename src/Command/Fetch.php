@@ -45,15 +45,15 @@ class Fetch extends Command
         $this->operationsLogger->info("Fetching successful");
     }
 
-    private function handle($estate)
+    private function handle($model)
     {
         // Save the Post
-        $postId = $this->estate->save_estate($estate);
+        $postId = $this->estate->save($model);
 
         // Configure the parsers
         $this->estateParser->setMethod('add_post_meta');
         $this->estateParser->setPostId($postId);
-        $this->estateParser->setEstateObject($estate);
+        $this->estateParser->setObject($model);
 
         // Parse the response object
         $this->estateParser->parseProperties();

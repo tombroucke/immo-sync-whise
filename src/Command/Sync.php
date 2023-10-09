@@ -77,12 +77,12 @@ class Sync extends Command
     private function handleSave($estate)
     {
         // Save the Post
-        $postId = $this->estate->save_estate($estate);
+        $postId = $this->estate->save($estate);
 
         // Configure the parser
         $this->estateParser->setMethod('add_post_meta');
         $this->estateParser->setPostId($postId);
-        $this->estateParser->setEstateObject($estate);
+        $this->estateParser->setObject($estate);
 
         // Parse the response object
         $this->estateParser->parseProperties();
@@ -96,12 +96,12 @@ class Sync extends Command
     private function handleUpdate($estate)
     {
         // Update the Post
-        $postId = $this->estate->update_estate($estate);
+        $postId = $this->estate->update($estate);
 
         // Configure the parser
         $this->estateParser->setMethod('update_post_meta');
         $this->estateParser->setPostId($postId);
-        $this->estateParser->setEstateObject($estate);
+        $this->estateParser->setObject($estate);
 
         // Parse the response object
         $this->estateParser->parseProperties();

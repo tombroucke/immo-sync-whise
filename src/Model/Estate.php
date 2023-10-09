@@ -23,7 +23,7 @@ class Estate extends Model
         ));
     }
 
-    public function save_estate($estate)
+    public function save($estate)
     {
         return wp_insert_post([
             'post_title' =>  $estate->name,
@@ -32,7 +32,7 @@ class Estate extends Model
         ]);
     }
 
-    public function update_estate($estate)
+    public function update($estate)
     {
         $post = get_posts([
             'meta_query' => [[
