@@ -51,12 +51,18 @@ class Container
                 whisePassword: Settings::getSetting('whise_password')
             )
         );
-        $estateSyncService = new EstateSyncService(estate: $estate, estateAdapter: $estateAdapter, estateParser: $estateParser);
+        $estateSyncService = new EstateSyncService(
+            estate: $estate,
+            estateAdapter: $estateAdapter,
+            estateParser: $estateParser,
+            logger: $operationsLogger
+        );
 
         // Everything is configured with an anonymous function, this ensures lazy loading, which is more performant
         $dependencies = [
             'logger' => fn () => $logger,
             'operations' => fn () => $operationsLogger,
+
             Estate::class => fn () => $estate,
             EstateParser::class => fn () => $estateParser,
             EstateAdapter::class => fn () => $estateAdapter,
