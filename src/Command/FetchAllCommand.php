@@ -2,9 +2,10 @@
 
 namespace ADB\ImmoSyncWhise\Command;
 
+use ADB\ImmoSyncWhise\Command\Contracts\CommandContract;
 use ADB\ImmoSyncWhise\Services\EstateSyncService;
 
-class FetchAll
+class FetchAll implements CommandContract
 {
     public const COMMAND_NAME = 'iws fetch-all';
 

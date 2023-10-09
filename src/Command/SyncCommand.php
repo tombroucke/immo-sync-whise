@@ -5,7 +5,7 @@ namespace ADB\ImmoSyncWhise\Command;
 use ADB\ImmoSyncWhise\Enum\PostType;
 use Illuminate\Support\Collection;
 
-class SyncCommand
+class SyncCommand implements CommandContract
 {
     public const COMMAND_NAME = 'iws sync';
 
