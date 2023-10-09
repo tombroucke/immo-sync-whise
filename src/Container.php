@@ -39,12 +39,12 @@ class Container
 
     public function addDependencies(): void
     {
-        $operationsLogger = (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log', Level::Debug));
-        $logger = (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log', Level::Debug));
+        $operations = (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log',   Level::Debug));
+        $logger     = (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log',        Level::Debug));
 
-        $estate = new Estate(logger: $logger);
-        $estateParser = new EstateParser(logger: $operationsLogger);
-        $estateAdapter = new EstateAdapter(
+        $estate         = new Estate(logger: $operations);
+        $estateParser   = new EstateParser(logger: $operations);
+        $estateAdapter  = new EstateAdapter(
             new Api(
                 connection: new WhiseApi(),
                 whiseUser: Settings::getSetting('whise_user'),
@@ -55,18 +55,18 @@ class Container
             estate: $estate,
             estateAdapter: $estateAdapter,
             estateParser: $estateParser,
-            logger: $operationsLogger
+            logger: $operations
         );
 
         // Everything is configured with an anonymous function, this ensures lazy loading, which is more performant
         $dependencies = [
-            'logger' => fn () => $logger,
-            'operations' => fn () => $operationsLogger,
+            'logger'                    => fn () => $logger,
+            'operations'                => fn () => $operations,
 
-            Estate::class => fn () => $estate,
-            EstateParser::class => fn () => $estateParser,
-            EstateAdapter::class => fn () => $estateAdapter,
-            EstateSyncService::class => fn () => $estateSyncService,
+            Estate::class               => fn () => $estate,
+            EstateParser::class         => fn () => $estateParser,
+            EstateAdapter::class        => fn () => $estateAdapter,
+            EstateSyncService::class    => fn () => $estateSyncService,
         ];
 
         foreach ($dependencies as $alias => $concrete) {
