@@ -16,7 +16,6 @@
     },
     "require": {
         "fw4/whise-api": "^1.5",
-        "vlucas/phpdotenv": "^5.5",
         "monolog/monolog": "^3.3",
         "league/container": "^4.2",
         "illuminate/collections": "^10.0",
