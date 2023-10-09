@@ -21,7 +21,7 @@ class Fetch
      */
     public function handle(): void
     {
-        $this->estateSyncService->syncAllEstates();
+        $this->estateSyncService->syncAll();
     }
 
     /**
