@@ -2,7 +2,7 @@
 
 namespace ADB\ImmoSyncWhise\Database;
 
-class CreateIwsDetailsTable
+class CreateDetailsTable
 {
     public function __construct()
     {
