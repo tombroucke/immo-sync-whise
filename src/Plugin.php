@@ -4,14 +4,12 @@ namespace ADB\ImmoSyncWhise;
 
 use ADB\ImmoSyncWhise\Admin\CPT\EstateCPT;
 use ADB\ImmoSyncWhise\Admin\Settings;
-use ADB\ImmoSyncWhise\Command\CommandHandler;
+use ADB\ImmoSyncWhise\Command\CommandRegistrar;
 use ADB\ImmoSyncWhise\Container;
 
 class Plugin
 {
-    private array $modules = [];
-
-    public function __construct()
+    public function __construct(private array $modules = [])
     {
         add_action('plugins_loaded', [$this, 'initModules']);
     }
@@ -21,7 +19,7 @@ class Plugin
         $container = Container::getInstance();
 
         $this->modules = [
-            new CommandHandler($container),
+            new CommandRegistrar($container),
             new Settings(),
             new EstateCPT(),
         ];
