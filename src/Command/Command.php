@@ -6,6 +6,7 @@ use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Command\Contracts\CommandContract;
 use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Model\Estate;
+use ADB\ImmoSyncWhise\Model\Model;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use Psr\Log\LoggerInterface;
 
@@ -26,7 +27,7 @@ abstract class Command implements CommandContract
         $this->operationsLogger = $container->get('operations');
     }
 
-    public function handle($model)
+    public function handle(Model $model): void
     {
     }
 }
