@@ -18,19 +18,25 @@ class EstateParser
     {
     }
 
-    public function setMethod(string $method): void
+    public function setMethod(string $method): EstateParser
     {
         $this->method = $method;
+
+        return $this;
     }
 
-    public function setPostId(int $postId): void
+    public function setPostId(int $postId): EstateParser
     {
         $this->postId = $postId;
+
+        return $this;
     }
 
-    public function setObject($response): void
+    public function setObject($response): EstateParser
     {
         $this->estateResponse = $response;
+
+        return $this;
     }
 
     public function parseProperties()
@@ -52,6 +58,8 @@ class EstateParser
     public function parsePictures()
     {
         try {
+            $start_time = microtime(true);
+
             foreach ($this->estateResponse->pictures as $key => $pictureInfo) {
                 $image = media_sideload_image($pictureInfo->urlXXL, $this->postId, 'Orientation: ' . $pictureInfo->orientation, 'id');
 
@@ -59,6 +67,12 @@ class EstateParser
                     set_post_thumbnail($this->postId, $image);
                 }
             }
+
+            $end_time = microtime(true);
+
+            $execution_time = $end_time - $start_time;
+
+            echo "Pictures parse Execution Time: {$execution_time} seconds\n";
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
 
@@ -78,6 +92,8 @@ class EstateParser
 
     public function parseDetails()
     {
+        $start_time = microtime(true);
+
         $db = new Database();
 
         try {
