@@ -8,54 +8,54 @@ class Estate
 {
     public function __construct()
     {
-        add_action('init', [$this, 'create']);
-        add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
-        add_action('add_meta_boxes_' . PostType::Name, [$this, 'estate_add_meta_boxes']);
-        add_filter('manage_posts_columns', [$this, 'featured_image_column']);
-        add_action('manage_posts_custom_column', [$this, 'featured_image_column_data'], 10, 2);
-        add_action('admin_head', [$this, 'columns_css']);
+        add_action('init',                              [$this, 'create']);
+        add_action('admin_enqueue_scripts',             [$this, 'admin_scripts']);
+        add_action('add_meta_boxes_' . PostType::Name,  [$this, 'estate_add_meta_boxes']);
+        add_filter('manage_posts_columns',              [$this, 'featured_image_column']);
+        add_action('manage_posts_custom_column',        [$this, 'featured_image_column_data'], 10, 2);
+        add_action('admin_head',                        [$this, 'columns_css']);
     }
 
     public function create()
     {
         $labels = array(
-            'name'          => 'Estates', // Plural name
-            'singular_name' => 'Estate'   // Singular name
+            'name'          => 'Estates',
+            'singular_name' => 'Estate'
         );
 
         $supports = array(
-            'title',        // Post title
-            'thumbnail',    // Allows feature images
-            'revisions',    // Shows autosaved version of the posts
+            'title',
+            'thumbnail',
+            'revisions',
         );
 
         $capabilities = array(
-            'create_posts' => false // Disable ability to create new post
+            'create_posts' => false
         );
 
         $args = array(
             'labels'              => $labels,
-            'description'         => 'Whise Estates', // Description
+            'description'         => 'Whise Estates',
             'supports'            => $supports,
-            'taxonomies'          => array(), // Allowed taxonomies
-            'hierarchical'        => false, // Allows hierarchical categorization, if set to false, the Custom Post Type will behave like Post, else it will behave like Page
-            'public'              => true,  // Makes the post type public
-            'show_ui'             => true,  // Displays an interface for this post type
-            'show_in_menu'        => true,  // Displays in the Admin Menu (the left panel)
-            'show_in_nav_menus'   => true,  // Displays in Appearance -> Menus
-            'show_in_admin_bar'   => true,  // Displays in the black admin bar
-            'menu_position'       => 5,     // The position number in the left menu
-            'menu_icon'           => 'dashicons-admin-multisite',  // The URL for the icon used for this post type
-            'can_export'          => true,  // Allows content export using Tools -> Export
-            'has_archive'         => true,  // Enables post type archive (by month, date, or year)
-            'exclude_from_search' => false, // Excludes posts of this type in the front-end search result page if set to true, include them if set to false
-            'publicly_queryable'  => true,  // Allows queries to be performed on the front-end part if set to true
-            'capability_type'     => 'post', // Allows read, edit, delete like “Post”
+            'taxonomies'          => array(),
+            'hierarchical'        => false,
+            'public'              => true,
+            'show_ui'             => true,
+            'show_in_menu'        => true,
+            'show_in_nav_menus'   => true,
+            'show_in_admin_bar'   => true,
+            'menu_position'       => 5,
+            'menu_icon'           => 'dashicons-admin-multisite',
+            'can_export'          => true,
+            'has_archive'         => true,
+            'exclude_from_search' => false,
+            'publicly_queryable'  => true,
+            'capability_type'     => 'post',
             'capabilities'        => $capabilities,
-            'map_meta_cap'        => true, // Set to `false`, if users are not allowed to edit/delete existing posts
+            'map_meta_cap'        => true,
         );
 
-        register_post_type(PostType::Name, $args); //Create a post type with the slug is ‘product’ and arguments in $args.
+        register_post_type(PostType::Name, $args);
     }
 
     public function estate_add_meta_boxes($post)
