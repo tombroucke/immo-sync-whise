@@ -1,10 +1,10 @@
 <?php
 
-use ADB\ImmoSyncWhise\Database\IwsDetailsTable;
+use ADB\ImmoSyncWhise\Database\Database;
 
 global $post;
 
-$details = (new IwsDetailsTable())->get($post->ID)->groupBy('detail_group');
+$details = (new Database())->get($post->ID)->groupBy('detail_group');
 ?>
 
 <div id="accordion">

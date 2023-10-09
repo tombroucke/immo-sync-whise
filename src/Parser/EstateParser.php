@@ -2,7 +2,7 @@
 
 namespace ADB\ImmoSyncWhise\Parser;
 
-use ADB\ImmoSyncWhise\Database\IwsDetailsTable;
+use ADB\ImmoSyncWhise\Database\Database;
 use Throwable;
 use Whise\Api\Response\ResponseObject;
 
@@ -74,11 +74,11 @@ class EstateParser extends Parser
 
     public function parseDetails()
     {
-        $iwsTable = new IwsDetailsTable();
+        $db = new Database();
 
         try {
             foreach ($this->estateResponse->details as $detailGroup) {
-                $iwsTable->save($this->postId, $detailGroup->getData());
+                $db->save($this->postId, $detailGroup->getData());
             }
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
@@ -89,7 +89,7 @@ class EstateParser extends Parser
 
     public function removeDetails()
     {
-        (new IwsDetailsTable())->delete($this->postId);
+        (new Database())->delete($this->postId);
     }
 
     private function parse($key, $value, $property)

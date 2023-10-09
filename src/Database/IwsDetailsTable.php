@@ -4,7 +4,7 @@ namespace ADB\ImmoSyncWhise\Database;
 
 use Illuminate\Support\Collection;
 
-class IwsDetailsTable
+class Database
 {
     private $table;
 
