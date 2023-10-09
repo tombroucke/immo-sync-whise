@@ -61,7 +61,7 @@ class EstateParser
             $start_time = microtime(true);
 
             foreach ($this->estateResponse->pictures as $key => $pictureInfo) {
-                $image = media_sideload_image($pictureInfo->urlXXL, $this->postId, 'Orientation: ' . $pictureInfo->orientation, 'id');
+                $image = media_sideload_image($pictureInfo->urlLarge, $this->postId, 'Orientation: ' . $pictureInfo->orientation, 'id');
 
                 if ($key === 0) {
                     set_post_thumbnail($this->postId, $image);
