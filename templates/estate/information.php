@@ -1,8 +1,8 @@
 <?php
 
 use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Matchers\EstateMatcher;
 use ADB\ImmoSyncWhise\Model\Estate;
-use ADB\ImmoSyncWhise\Model\EstateMatcher;
 
 global $post;
 

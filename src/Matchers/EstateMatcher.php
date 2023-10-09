@@ -1,6 +1,6 @@
 <?php
 
-namespace ADB\ImmoSyncWhise\Model;
+namespace ADB\ImmoSyncWhise\Matchers;
 
 use ADB\ImmoSyncWhise\Lookup\Category;
 use ADB\ImmoSyncWhise\Lookup\Country;
