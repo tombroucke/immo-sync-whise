@@ -8,10 +8,10 @@ use ADB\ImmoSyncWhise\Services\EstateSyncService;
 
 class CommandHandler
 {
-    public function __construct(Container $container)
+    public function __construct(public Container $container)
     {
         if (defined('WP_CLI') && WP_CLI) {
-            \WP_CLI::add_command(Fetch::COMMAND_NAME, new Fetch($container->get(EstateSyncService::class)));
+            \WP_CLI::add_command(Fetch::COMMAND_NAME, new Fetch($this->container->get(EstateSyncService::class)));
 
             // array_map(
             //     function ($className, $params) use ($container) {
