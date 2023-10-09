@@ -2,11 +2,10 @@
 
 namespace ADB\ImmoSyncWhise\Command;
 
-use ADB\ImmoSyncWhise\Command\Command;
 use ADB\ImmoSyncWhise\Enum\PostType;
 use Illuminate\Support\Collection;
 
-class Sync extends Command
+class SyncCommand
 {
     public const COMMAND_NAME = 'iws sync';
 
