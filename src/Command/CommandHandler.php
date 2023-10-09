@@ -8,24 +8,27 @@ use ADB\ImmoSyncWhise\Services\EstateSyncService;
 
 class CommandHandler
 {
-    private $commands = [];
-
     public function __construct(Container $container)
     {
         if (defined('WP_CLI') && WP_CLI) {
-            $this->commands = array_map(
-                function ($className, $params) use ($container) {
-                    return \WP_CLI::add_command(
-                        $className::COMMAND_NAME,
-                        function () use ($className, $container, $params) {
-                            return new $className($container->get('operations'), ...$params);
-                        }
-                    );
-                },
-                [
-                    Fetch::class => [$container->get(EstateSyncService::class)],
-                ]
-            );
+            \WP_CLI::add_command(Fetch::COMMAND_NAME, new Fetch($container->get(EstateSyncService::class)));
+
+            // array_map(
+            //     function ($className, $params) use ($container) {
+            //         dd($params);
+            //         return \WP_CLI::add_command(
+            //             $className::COMMAND_NAME,
+            //             function () use ($className, $container, $params) {
+            //                 return new $className($container->get('operations'), ...$params);
+            //             }
+            //         );
+            //     },
+            //     [
+            //         Fetch::class => [
+            //             $container->get(EstateSyncService::class)
+            //         ],
+            //     ]
+            // );
         }
     }
 }
