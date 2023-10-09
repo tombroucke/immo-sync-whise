@@ -2,7 +2,7 @@
 
 namespace ADB\ImmoSyncWhise;
 
-use ADB\ImmoSyncWhise\Admin\CPT\Estate;
+use ADB\ImmoSyncWhise\Admin\CPT\EstateCPT;
 use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Command\CommandHandler;
 use ADB\ImmoSyncWhise\Container;
@@ -23,7 +23,7 @@ class Plugin
         $this->modules = [
             new CommandHandler($container),
             new Settings(),
-            new Estate(),
+            new EstateCPT(),
         ];
     }
 
