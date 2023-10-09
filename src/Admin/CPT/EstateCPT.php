@@ -4,7 +4,7 @@ namespace ADB\ImmoSyncWhise\Admin\CPT;
 
 use ADB\ImmoSyncWhise\Enum\PostType;
 
-class Estate
+class EstateCPT
 {
     public function __construct()
     {
