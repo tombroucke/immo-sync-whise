@@ -18,10 +18,10 @@ abstract class Command
 
     public function __construct(Container $container)
     {
-        $this->estate = $container->make(Estate::class);
-        $this->estateAdapter = $container->make(EstateAdapter::class);
-        $this->estateParser = $container->make(EstateParser::class);
-        $this->logger = $container->get('logger');
+        $this->estate           = $container->make(Estate::class);
+        $this->estateAdapter    = $container->make(EstateAdapter::class);
+        $this->estateParser     = $container->make(EstateParser::class);
+        $this->logger           = $container->get('logger');
         $this->operationsLogger = $container->get('operations');
     }
 }
