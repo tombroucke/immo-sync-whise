@@ -68,7 +68,7 @@ class EstateParser
             $promises = [];
 
             foreach ($this->estateResponse->pictures as $pictureInfo) {
-                $promises[] = $this->client->getAsync($pictureInfo->urlLarge);
+                $promises[] = $this->client->getAsync($pictureInfo->urlXXL);
             }
 
             $responses = Promise\Utils::unwrap($promises);
