@@ -19,6 +19,8 @@
         "monolog/monolog": "^3.3",
         "league/container": "^4.2",
         "illuminate/collections": "^10.0",
-        "phpunit/phpunit": "^10.3"
+        "phpunit/phpunit": "^10.3",
+        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/promises": "^2.0"
     }
 }

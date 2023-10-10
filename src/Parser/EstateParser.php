@@ -3,6 +3,8 @@
 namespace ADB\ImmoSyncWhise\Parser;
 
 use ADB\ImmoSyncWhise\Database\Database;
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -14,8 +16,11 @@ class EstateParser
 
     public $estateResponse;
 
+    private $client;
+
     public function __construct(public LoggerInterface $logger)
     {
+        $this->client = new Client();
     }
 
     public function setMethod(string $method): EstateParser
@@ -58,26 +63,66 @@ class EstateParser
     public function parsePictures()
     {
         try {
-            $start_time = microtime(true);
+            // $start_time = microtime(true);
 
-            foreach ($this->estateResponse->pictures as $key => $pictureInfo) {
-                $image = media_sideload_image($pictureInfo->urlLarge, $this->postId, 'Orientation: ' . $pictureInfo->orientation, 'id');
+            $promises = [];
+
+            foreach ($this->estateResponse->pictures as $pictureInfo) {
+                $promises[] = $this->client->getAsync($pictureInfo->urlLarge);
+            }
+
+            $responses = Promise\Utils::unwrap($promises);
+
+            foreach ($responses as $key => $response) {
+                if ($response instanceof \WP_Error) {
+                    continue;
+                }
+
+                $attachmentId = $this->saveImageToPost($response, $this->postId);
 
                 if ($key === 0) {
-                    set_post_thumbnail($this->postId, $image);
+                    set_post_thumbnail($this->postId, $attachmentId);
                 }
             }
 
-            $end_time = microtime(true);
+            // $end_time = microtime(true);
 
-            $execution_time = $end_time - $start_time;
+            // $execution_time = $end_time - $start_time;
 
-            echo "Pictures parse Execution Time: {$execution_time} seconds\n";
+            // echo "Pictures parse Execution Time: {$execution_time} seconds\n";
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
 
             $this->logger->error("There was an error when saving estate pictures {$error} for {$this->postId}");
         }
+    }
+
+    private function saveImageToPost($response, int $postId): int
+    {
+        $filename = basename(uniqid() . '.jpg');
+        $uploadDir = wp_upload_dir();
+        $filePath = $uploadDir['path'] . '/' . $filename;
+
+        // Save the image file
+        file_put_contents($filePath, $response->getBody());
+
+        // Create the attachment data
+        $attachment = [
+            'guid'           => $uploadDir['url'] . '/' . $filename,
+            'post_mime_type' => $response->getHeaderLine('Content-Type'),
+            'post_title'     => $filename,
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+        ];
+
+        // Insert the attachment
+        $attachmentId = wp_insert_attachment($attachment, $filePath, $postId);
+
+        // Generate the attachment metadata
+        $attachmentData = wp_generate_attachment_metadata($attachmentId, $filePath);
+        wp_update_attachment_metadata($attachmentId, $attachmentData);
+
+        return $attachmentId;
     }
 
     public function removePictures()
