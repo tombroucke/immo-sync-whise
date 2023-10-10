@@ -58,7 +58,7 @@ class Container
             logger: $operations
         );
 
-        // Everything is configured with an anonymous function, this ensures lazy loading, which is more performant
+        // Everything is configured as an anonymous function, this ensures lazy loading, which is more performant
         $dependencies = [
             'logger'                    => fn () => $logger,
             'operations'                => fn () => $operations,
