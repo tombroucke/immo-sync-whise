@@ -22,6 +22,44 @@ LANG="nl-BE"
 
 The `LANG` option represents the desired language for the Whise integration (e.g., "nl-BE" for Dutch - Belgium).
 
+To include information on how to call your custom commands in the readme, you can create a dedicated section or subsection for these commands. Here's an example of how you can add this information to your existing readme:
+
+## Custom Commands
+
+The ImmoSyncWhise plugin provides custom commands that can be executed via the WordPress command-line interface (WP-CLI). These commands offer additional functionality to manage your real estate listings. To use these commands, follow the instructions below:
+
+### Fetch All Command
+
+**Command Name:** `iws fetch-all`
+
+To fetch all real estate listings, use the following command:
+
+```bash
+wp iws fetch-all handle
+```
+
+### Sync Deleted Command
+
+**Command Name:** `iws sync-deleted`
+
+To synchronize deleted real estate listings, use the following command:
+
+```bash
+wp iws sync-deleted handle
+```
+
+### Sync Today Command
+
+**Command Name:** `iws sync-today`
+
+To synchronize real estate listings updated today, use the following command:
+
+```bash
+wp iws sync-today handle
+```
+
+These custom commands provide additional control over your real estate listings, allowing you to fetch, sync deleted listings, or sync today's updates as needed.
+
 ## Testing (PHPUnit)
 
 The ImmoSyncWhise plugin includes PHPUnit tests to ensure its functionality remains consistent and free from regressions. To run the tests, follow these steps:
