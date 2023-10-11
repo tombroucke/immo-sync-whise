@@ -7,7 +7,9 @@ use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Api;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
-use ADB\ImmoSyncWhise\Services\EstateSyncService;
+use ADB\ImmoSyncWhise\Services\EstateFetchService;
+use ADB\ImmoSyncWhise\Services\EstateSyncDeletedService;
+use ADB\ImmoSyncWhise\Services\EstateSyncTodayService;
 use League\Container\Container as LeagueContainer;
 use League\Container\ReflectionContainer;
 use Monolog\Handler\StreamHandler;
@@ -39,34 +41,29 @@ class Container
 
     public function addDependencies(): void
     {
-        $operations = (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log',   Level::Debug));
-        $logger     = (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log',        Level::Debug));
+        $operations     = (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log',   Level::Debug));
+        $logger         = (new Logger('normal_log'))->pushHandler(new StreamHandler(__DIR__ . '/logs/debug.log',        Level::Debug));
 
         $estate         = new Estate(logger: $operations);
         $estateParser   = new EstateParser(logger: $operations);
         $estateAdapter  = new EstateAdapter(
-            new Api(
-                connection: new WhiseApi(),
-                whiseUser: Settings::getSetting('whise_user'),
-                whisePassword: Settings::getSetting('whise_password')
-            )
+            new Api(connection: new WhiseApi(), whiseUser: Settings::getSetting('whise_user'), whisePassword: Settings::getSetting('whise_password'))
         );
-        $estateSyncService = new EstateSyncService(
-            estate: $estate,
-            estateAdapter: $estateAdapter,
-            estateParser: $estateParser,
-            logger: $operations
-        );
+        $estateFetchService         = new EstateFetchService(estate: $estate, estateAdapter: $estateAdapter, estateParser: $estateParser, logger: $operations);
+        $estateSyncDeletedService   = new EstateSyncDeletedService(estate: $estate, estateAdapter: $estateAdapter, estateParser: $estateParser, logger: $operations);
+        $estateSyncTodayService     = new EstateSyncTodayService(estate: $estate, estateAdapter: $estateAdapter, estateParser: $estateParser, logger: $operations);
 
         // Everything is configured as an anonymous function, this ensures lazy loading, which is more performant
         $dependencies = [
-            'logger'                    => fn () => $logger,
-            'operations'                => fn () => $operations,
+            'logger'                                => fn () => $logger,
+            'operations'                            => fn () => $operations,
 
-            Estate::class               => fn () => $estate,
-            EstateParser::class         => fn () => $estateParser,
-            EstateAdapter::class        => fn () => $estateAdapter,
-            EstateSyncService::class    => fn () => $estateSyncService,
+            Estate::class                           => fn () => $estate,
+            EstateParser::class                     => fn () => $estateParser,
+            EstateAdapter::class                    => fn () => $estateAdapter,
+            EstateFetchService::class               => fn () => $estateFetchService,
+            EstateSyncDeletedService::class         => fn () => $estateSyncDeletedService,
+            EstateSyncTodayService::class           => fn () => $estateSyncTodayService,
         ];
 
         foreach ($dependencies as $alias => $concrete) {

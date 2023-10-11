@@ -7,7 +7,7 @@ use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use Psr\Log\LoggerInterface;
 
-class EstateSyncService
+class EstateFetchService
 {
     public function __construct(
         private Estate $estate,
@@ -17,27 +17,24 @@ class EstateSyncService
     ) {
     }
 
-    public function syncAll(): void
+    public function fetchAll(): void
     {
-        \WP_CLI::log("Fetching all estates from Whise API");
+        \WP_CLI::success("Fetching all estates from Whise API");
         $this->logger->info("Fetching all estates from Whise API");
 
         $estates = $this->estateAdapter->list(['LanguageId' => $_ENV['LANG']]);
 
         foreach ($estates as $estate) {
-            // Save the Post
             $postId = $this->estate->save($estate);
 
-            // Configure the parser
             $this->estateParser->setMethod('add_post_meta')->setPostId($postId)->setObject($estate);
 
-            // Parse the response object
             $this->estateParser->parseProperties();
             $this->estateParser->parseDetails();
             $this->estateParser->parsePictures();
 
-            \WP_CLI::success("Fetched estate, created post with ID #{$postId}");
-            $this->logger->info("Fetched estate, created post with ID #{$postId}");
+            \WP_CLI::success("Fetched estate, created estate with post ID #{$postId}");
+            $this->logger->info("Fetched estate, created estate with post ID #{$postId}");
         }
 
         \WP_CLI::success('Fetching successful');
