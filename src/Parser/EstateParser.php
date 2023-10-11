@@ -63,8 +63,6 @@ class EstateParser
     public function parsePictures()
     {
         try {
-            // $start_time = microtime(true);
-
             $promises = [];
 
             foreach ($this->estateResponse->pictures as $pictureInfo) {
@@ -84,12 +82,6 @@ class EstateParser
                     set_post_thumbnail($this->postId, $attachmentId);
                 }
             }
-
-            // $end_time = microtime(true);
-
-            // $execution_time = $end_time - $start_time;
-
-            // echo "Pictures parse Execution Time: {$execution_time} seconds\n";
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
 
@@ -137,8 +129,6 @@ class EstateParser
 
     public function parseDetails()
     {
-        $start_time = microtime(true);
-
         $db = new Database();
 
         try {
