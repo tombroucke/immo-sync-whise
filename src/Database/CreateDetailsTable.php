@@ -23,6 +23,7 @@ class CreateDetailsTable
                 detail_type varchar(255) NULL,
                 detail_value varchar(255) NULL,
                 detail_group varchar(255) NULL,
+                detail_show varchar(255) NULL,
                 UNIQUE KEY id (id),
                 FOREIGN KEY (post_id) REFERENCES wp_posts (id) ON DELETE CASCADE
                 ) $charset_collate;";

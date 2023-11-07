@@ -12,14 +12,28 @@ $matcher = new EstateMatcher();
 ?>
 
 <div class="information_wrapper">
-    <?php foreach ($fields as $key => $field) : ?>
-        <div class="information_group">
-            <p>
-                <strong><span><?php echo $matcher->getTitle($key) ?>:</strong></span> <span id="<?php echo $key ?>"><?php echo $matcher->getField($key, $field) ?></span>
-            </p>
-            <div>
-                <p class="description" id="tagline-description"><?php echo $matcher->getDescription($key) ?></p>
-            </div>
-        </div>
-    <?php endforeach; ?>
+    <?php
+    foreach ($fields as $key => $field) {
+        if (strpos($key, '_show_') === false) {
+            $showField = get_post_meta($post->ID, '_show' . $key, true);
+            $showIcon = '';
+
+            if ($showField == 0) {
+                $showIcon = '<i class="fas fa-eye-slash clickable-eye" data-meta-key="' . $key . '" data-meta-value="' . $showField . '"></i>';
+            } elseif ($showField == 1) {
+                $showIcon = '<i class="fas fa-eye clickable-eye" data-meta-key="' . $key . '" data-meta-value="' . $showField . '"></i>';
+            }
+
+            echo '<div class="information_group">';
+            echo '<p>';
+            echo '<strong><span>' . $matcher->getTitle($key) . ': </strong></span>';
+            echo '<span id="' . $key . '">' . $matcher->getField($key, $field) . ' ' . $showIcon . '</span>';
+            echo '</p>';
+            echo '<div>';
+            echo '<p class="description" id="tagline-description">' . $matcher->getDescription($key) . '</p>';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+    ?>
 </div>

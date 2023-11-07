@@ -36,6 +36,7 @@ class Database
                 'detail_type' => $details['type'],
                 'detail_value' => $details['value'],
                 'detail_group' => $details['group'],
+                'detail_show' => 0,
             ]
         );
     }
@@ -50,6 +51,7 @@ class Database
                 'detail_type' => $details['type'],
                 'detail_value' => $details['value'],
                 'detail_group' => $details['group'],
+                'detail_show' => $details['show'],
             ],
             ['post_id' => $postId]
         );

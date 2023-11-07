@@ -149,29 +149,55 @@ class EstateParser
 
     private function parse($key, $value, $property)
     {
-        call_user_func_array($this->method, [
-            $this->postId, '_iws_' . $key,
-            $value->{$property},
-            $this->method == 'add_post_meta' ? true : ''
-        ]);
+        call_user_func_array(
+            $this->method,
+            [
+                $this->postId, '_iws_' . $key,
+                $value->{$property},
+                $this->method == 'add_post_meta' ? true : ''
+            ]
+        );
+
+        $this->addShowMetaField($key);
     }
 
     private function parseArray($key, $value, $property)
     {
-        call_user_func_array($this->method, [
-            $this->postId, '_iws_' . $key,
-            $value->getData()[$property],
-            $this->method == 'add_post_meta' ? true : ''
-        ]);
+        call_user_func_array(
+            $this->method,
+            [
+                $this->postId, '_iws_' . $key,
+                $value->getData()[$property],
+                $this->method == 'add_post_meta' ? true : ''
+            ]
+        );
+
+        $this->addShowMetaField($key);
     }
 
     private function parseLine($key, $value): void
     {
-        call_user_func_array($this->method, [
-            $this->postId,
-            '_iws_' . $key,
-            $value,
-            $this->method == 'add_post_meta' ? true : ''
-        ]);
+        call_user_func_array(
+            $this->method,
+            [
+                $this->postId,
+                '_iws_' . $key,
+                $value,
+                $this->method == 'add_post_meta' ? true : ''
+            ]
+        );
+
+        $this->addShowMetaField($key);
+    }
+
+    /**
+     * Add "show" meta field with value of "0" as in, not visible
+     *
+     * @param string $key
+     * @return void
+     */
+    private function addShowMetaField($key)
+    {
+        call_user_func_array($this->method, [$this->postId, '_show_iws_' . $key,  0, $this->method == 'add_post_meta' ? true : '']);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace ADB\ImmoSyncWhise\Admin\CPT;
 
+use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Enum\PostType;
+use ADB\ImmoSyncWhise\Model\Estate;
 
 class EstateCPT
 {
@@ -14,6 +16,8 @@ class EstateCPT
         add_filter('manage_posts_columns',              [$this, 'featured_image_column']);
         add_action('manage_posts_custom_column',        [$this, 'featured_image_column_data'], 10, 2);
         add_action('admin_head',                        [$this, 'columns_css']);
+        add_action('wp_ajax_toggle_show_field',         [$this, 'toggle_show_field_callback']);
+        add_action('wp_ajax_nopriv_toggle_show_field',  [$this, 'toggle_show_field_callback']);
     }
 
     public function create()
@@ -142,6 +146,23 @@ class EstateCPT
         include_once ISW_PATH . '/templates/estate/gallery.php';
     }
 
+    public function toggle_show_field_callback()
+    {
+        if (isset($_POST['post_id'], $_POST['meta_key'], $_POST['meta_value'])) {
+            $post_id = intval($_POST['post_id']);
+            $meta_key = sanitize_text_field($_POST['meta_key']);
+            $meta_value = intval($_POST['meta_value']);
+
+            update_post_meta($post_id, '_show' . $meta_key, $meta_value);
+
+            echo 'success';
+        } else {
+            echo 'error';
+        }
+
+        wp_die();
+    }
+
     public function admin_scripts()
     {
         global $post_type;
@@ -154,6 +175,11 @@ class EstateCPT
             wp_enqueue_script('jquery-ui-accordion');
             wp_enqueue_script('whise-index-js', plugins_url('/immo-sync-whise/assets/admin/js/index.js'), ['jquery', 'jquery-ui-accordion'], ISW_VERSION);
             wp_enqueue_style('whise-estate-css', plugins_url('/immo-sync-whise/assets/admin/css/estate.css'), [], ISW_VERSION . time());
+
+            if (is_admin()) {
+                wp_enqueue_script('whise-estate-js', plugins_url('/immo-sync-whise/assets/admin/js/estate.js'), ['media-models'], ISW_VERSION);
+                wp_localize_script('whise-estate-js', 'estateData', ['post_id' => get_the_ID()]);
+            }
         }
     }
 }
