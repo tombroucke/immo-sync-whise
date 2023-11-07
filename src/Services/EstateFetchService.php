@@ -19,7 +19,7 @@ class EstateFetchService
 
     public function fetchAll(): void
     {
-        \WP_CLI::success("Fetching all estates from Whise API");
+        \WP_CLI::line("Fetching all estates from Whise API");
         $this->logger->info("Fetching all estates from Whise API");
 
         $estates = $this->estateAdapter->list(['LanguageId' => $_ENV['LANG']]);
