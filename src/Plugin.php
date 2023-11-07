@@ -6,6 +6,7 @@ use ADB\ImmoSyncWhise\Admin\CPT\EstateCPT;
 use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Command\CommandRegistrar;
 use ADB\ImmoSyncWhise\Container;
+use ADB\ImmoSyncWhise\Integrations\Elementor\ElementorWidgetInstantior;
 
 class Plugin
 {
@@ -23,6 +24,15 @@ class Plugin
             new Settings(),
             new EstateCPT(),
         ];
+
+        add_action('elementor/init', [$this, 'register_immo_sync_whise_elementor_widgets']);
+    }
+
+    public function register_immo_sync_whise_elementor_widgets()
+    {
+        if (class_exists('\Elementor\Widget_Base')) {
+            new ElementorWidgetInstantior();
+        }
     }
 
     public static function render(string $template, array $context = []): string|null
