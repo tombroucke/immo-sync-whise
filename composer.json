@@ -2,7 +2,8 @@
     "name": "adb/immo-sync-whise",
     "autoload": {
         "psr-4": {
-            "ADB\\ImmoSyncWhise\\": "src/"
+            "ADB\\ImmoSyncWhise\\": "src/",
+            "ADB\\ImmoSyncWhise\\Vendor\\": "lib/packages/"
         }
     },
     "authors": [
@@ -12,15 +13,24 @@
         }
     ],
     "require-dev": {
-        "symfony/var-dumper": "^6.2"
+        "symfony/var-dumper": "^6.2",
+        "phpunit/phpunit": "^10.3"
     },
     "require": {
         "fw4/whise-api": "^1.5",
         "monolog/monolog": "^3.3",
         "league/container": "^4.2",
         "illuminate/collections": "^10.0",
-        "phpunit/phpunit": "^10.3",
         "guzzlehttp/guzzle": "^7.0",
         "guzzlehttp/promises": "^2.0"
+    },
+    "extra": {
+      "mozart": {
+        "dep_namespace": "ADB\\ImmoSyncWhise\\Vendor\\",
+        "dep_directory": "/lib/packages/",
+        "classmap_directory": "/lib/classes/",
+        "classmap_prefix": "ADB_",
+        "delete_vendor_directories": true
+      }
     }
 }
