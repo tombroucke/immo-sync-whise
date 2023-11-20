@@ -2,7 +2,7 @@
 
 namespace ADB\ImmoSyncWhise\Parser\Contracts;
 
-use Whise\Api\Response\ResponseObject;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\Response\ResponseObject;
 
 interface ParserContract
 {

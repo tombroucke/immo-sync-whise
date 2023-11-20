@@ -3,8 +3,8 @@
 namespace ADB\ImmoSyncWhise\Adapter;
 
 use ADB\ImmoSyncWhise\Api;
-use Whise\Api\Response\CollectionResponse;
-use Whise\Api\Response\Response;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\Response\CollectionResponse;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\Response\Response;
 
 class EstateAdapter
 {

@@ -5,7 +5,7 @@ namespace ADB\ImmoSyncWhise\Parser;
 use ADB\ImmoSyncWhise\Database\Database;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
-use Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 use Throwable;
 
 class EstateParser

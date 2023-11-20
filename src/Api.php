@@ -3,8 +3,8 @@
 namespace ADB\ImmoSyncWhise;
 
 use ADB\ImmoSyncWhise\Exceptions\CredentialsNotSetException;
-use Whise\Api\Exception\AuthException;
-use Whise\Api\WhiseApi;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\Exception\AuthException;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\WhiseApi;
 
 class Api
 {

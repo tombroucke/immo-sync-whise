@@ -7,7 +7,7 @@ use ADB\ImmoSyncWhise\Enum\PostType;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use Illuminate\Support\Collection;
-use Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 
 class EstateSyncDeletedService
 {

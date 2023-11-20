@@ -10,12 +10,12 @@ use ADB\ImmoSyncWhise\Parser\EstateParser;
 use ADB\ImmoSyncWhise\Services\EstateFetchService;
 use ADB\ImmoSyncWhise\Services\EstateSyncDeletedService;
 use ADB\ImmoSyncWhise\Services\EstateSyncTodayService;
-use League\Container\Container as LeagueContainer;
-use League\Container\ReflectionContainer;
-use Monolog\Handler\StreamHandler;
-use Monolog\Level;
-use Monolog\Logger;
-use Whise\Api\WhiseApi;
+use ADB\ImmoSyncWhise\Vendor\League\Container\Container as LeagueContainer;
+use ADB\ImmoSyncWhise\Vendor\League\Container\ReflectionContainer;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Handler\StreamHandler;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Level;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Logger;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\WhiseApi;
 
 class Container
 {

@@ -91,6 +91,26 @@ sting section, developers and contributors will have clear instructions on how t
 
 - For additional support or feature requests, please contact the plugin developer or check the plugin's official WordPress repository page for documentation and updates.
 
+## Development
+
+This package's dependencies are wrapped in our own namespace by a (patched version)[https://github.com/coenjacobs/mozart/pull/136] of (coenjacobs/mozart)[https://github.com/coenjacobs/mozart].
+
+1. `composer global require cweagans/composer-patches`
+2. Add patch to `~/.composer/composer.json`:
+```json
+	...
+	"extra": {
+		"patches": {
+			"coenjacobs/mozart": {
+				"allow to skip duplicated files": "https://github.com/coenjacobs/mozart/pull/136.patch"
+			}
+		}
+	},
+	...
+```
+3. `composer global require cweagans/coenjacobs/mozart`
+4. In plugin root: `~/.composer/vendor/bin/mozart compose`
+
 ## License
 
 This plugin is licensed under the [MIT License](LICENSE). Feel free to modify and distribute it as needed.

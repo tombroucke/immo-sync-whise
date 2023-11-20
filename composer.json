@@ -12,6 +12,7 @@
             "email": "git@key2info.be"
         }
     ],
+    "type": "wordpress-plugin",
     "require-dev": {
         "symfony/var-dumper": "^6.2",
         "phpunit/phpunit": "^10.3"
@@ -25,19 +26,18 @@
         "guzzlehttp/promises": "^2.0"
     },
     "extra": {
-      "mozart": {
-        "dep_namespace": "ADB\\ImmoSyncWhise\\Vendor\\",
-        "dep_directory": "/lib/packages/",
-        "classmap_directory": "/lib/classes/",
-        "classmap_prefix": "ADB_",
-        "packages": [
-          "monolog/monolog", 
-          "league/container", 
-          "illuminate/collections", 
-          "guzzlehttp/guzzle", 
-          "guzzlehttp/promises"
-        ],
-        "delete_vendor_directories": true
-      }
+        "mozart": {
+            "dep_namespace": "ADB\\ImmoSyncWhise\\Vendor\\",
+            "dep_directory": "/lib/packages/",
+            "classmap_directory": "/lib/classes/",
+            "classmap_prefix": "ADB_",
+            "delete_vendor_directories": true,
+            "skip_duplicates": true
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
     }
 }

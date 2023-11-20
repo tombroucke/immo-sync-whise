@@ -4,7 +4,7 @@ namespace ADB\ImmoSyncWhise\Model;
 
 use ADB\ImmoSyncWhise\Enum\PostType;
 use ADB\ImmoSyncWhise\Model\Contracts\ModelContract;
-use Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 use Throwable;
 
 class Estate implements ModelContract
