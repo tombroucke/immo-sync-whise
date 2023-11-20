@@ -30,6 +30,13 @@
         "dep_directory": "/lib/packages/",
         "classmap_directory": "/lib/classes/",
         "classmap_prefix": "ADB_",
+        "packages": [
+          "monolog/monolog", 
+          "league/container", 
+          "illuminate/collections", 
+          "guzzlehttp/guzzle", 
+          "guzzlehttp/promises"
+        ],
         "delete_vendor_directories": true
       }
     }
