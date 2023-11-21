@@ -20,6 +20,6 @@ class SyncTodayCommand implements CommandContract
      */
     public function handle(): void
     {
-        $this->estateSyncTodayService->sync();
+        $this->estateSyncTodayService->run();
     }
 }
