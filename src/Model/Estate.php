@@ -9,11 +9,14 @@ use Throwable;
 
 class Estate implements ModelContract
 {
-    public function __construct(public LoggerInterface $logger)
+    private ?LoggerInterface $logger = null;
+
+    public function setLogger(LoggerInterface $logger): void
     {
+        $this->logger = $logger;
     }
 
-    public function get_estate($postId): \WP_Post|array|null
+    public function get_estate(int $postId): \WP_Post|array|null
     {
         return get_post($postId);
     }

@@ -5,6 +5,7 @@ use ADB\ImmoSyncWhise\Database\Database;
 global $post;
 
 $details = (new Database())->get($post->ID)->groupBy('detail_group');
+
 ?>
 
 <div id="accordion">

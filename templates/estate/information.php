@@ -1,13 +1,13 @@
 <?php
 
-use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Matchers\EstateMatcher;
 use ADB\ImmoSyncWhise\Model\Estate;
+use Illuminate\Container\Container;
 
 global $post;
 
-$fields = Container::getInstance()->get(Estate::class)->getMetaFields($post->ID);
-$matcher = new EstateMatcher();
+$fields = Container::getInstance()->make(Estate::class)->getMetaFields($post->ID);
+$matcher = Container::getInstance()->make(EstateMatcher::class);
 
 ?>
 
