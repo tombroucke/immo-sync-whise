@@ -60,13 +60,20 @@ class EstateParser
         }
     }
 
-    public function parsePictures()
+    /**
+     * Ayns retrieve pictures from Whise api and parse them into WP
+     *
+     * @param string $pictureDimension Choose between "urlSmall" or "urlLarge" or "urlXXL", choosing "urlSmall" will provide the fastest response
+     * 
+     * @return void
+     */
+    public function parsePictures($pictureDimension)
     {
         try {
             $promises = [];
 
             foreach ($this->estateResponse->pictures as $pictureInfo) {
-                $promises[] = $this->client->getAsync($pictureInfo->urlXXL);
+                $promises[] = $this->client->getAsync($pictureInfo->$pictureDimension);
             }
 
             $responses = Promise\Utils::unwrap($promises);
