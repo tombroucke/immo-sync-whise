@@ -17,8 +17,15 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+use ADB\ImmoSyncWhise\Admin\Settings;
+use ADB\ImmoSyncWhise\Api;
 use ADB\ImmoSyncWhise\Database\CreateDetailsTable;
 use ADB\ImmoSyncWhise\Plugin;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Whise\Api\WhiseApi;
 
 define('ISW_VERSION', fileatime(__DIR__));
 define('ISW_PATH', __DIR__);
@@ -26,4 +33,36 @@ define('PLUGIN__FILE__', __FILE__);
 
 new CreateDetailsTable();
 
-$immo_sync_whise = new Plugin();
+/**
+ * Get main plugin class
+ *
+ * @return Plugin
+ */
+function immo_sync_whise()
+{
+    static $immo_sync_whise;
+
+    if (!$immo_sync_whise) {
+        $immo_sync_whise = new Plugin();
+
+        do_action("immo_sync_whise", $immo_sync_whise);
+    }
+
+    return $immo_sync_whise;
+}
+
+/**
+ * Since we are using illuminate/container from Laravel we can bind concrete implementations in the container, this can be done below
+ */
+add_action('immo_sync_whise', function ($immo_sync_whise) {
+    $immo_sync_whise->bind(LoggerInterface::class, function ($plugin, $args) {
+        return (new Logger('operations'))->pushHandler(new StreamHandler(__DIR__ . '/logs/operations.log', Level::Debug));
+    });
+
+    $immo_sync_whise->bind(Api::class, function ($plugin, $args) {
+        return new Api(connection: new WhiseApi(), whiseUser: Settings::getSetting('whise_user'), whisePassword: Settings::getSetting('whise_password'));
+    });
+});
+
+// Run plugin
+immo_sync_whise();

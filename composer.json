@@ -21,6 +21,7 @@
         "illuminate/collections": "^10.0",
         "phpunit/phpunit": "^10.3",
         "guzzlehttp/guzzle": "^7.0",
-        "guzzlehttp/promises": "^2.0"
+        "guzzlehttp/promises": "^2.0",
+        "illuminate/container": "^10.32"
     }
 }

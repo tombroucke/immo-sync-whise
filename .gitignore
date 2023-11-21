@@ -8,3 +8,4 @@ src/logs/operations.log
 phpunit.xml.bak
 /.phpunit.cache\test-results
 .phpunit.cache/test-results
+/logs
