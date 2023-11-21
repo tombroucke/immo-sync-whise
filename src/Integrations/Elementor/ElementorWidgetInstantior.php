@@ -10,14 +10,16 @@ class ElementorWidgetInstantior
 
     public function __construct()
     {
-        $this->widgets = [
-            new EstateInformation(),
-        ];
-
-        add_action('elementor/elements/categories_registered', [$this, 'addImmoSyncWhiseWidgetCategory']);
+        add_action('elementor/widgets/register', [$this, 'registerWidget']);
+        add_action('elementor/elements/categories_registered', [$this, 'registerCategory']);
     }
 
-    public function addImmoSyncWhiseWidgetCategory($elements_manager)
+    public function registerWidget($widgets_manager)
+    {
+        $widgets_manager->register(new EstateInformation());
+    }
+
+    public function registerCategory($elements_manager)
     {
         $elements_manager->add_category(
             'immo-sync-whise',

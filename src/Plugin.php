@@ -23,14 +23,12 @@ class Plugin extends Container
             new EstateCPT(),
         ];
 
-        add_action('elementor/init', [$this, 'register_immo_sync_whise_elementor_widgets']);
+        add_action('elementor/init', [$this, 'initElementor']);
     }
 
-    public function register_immo_sync_whise_elementor_widgets()
+    public function initElementor()
     {
-        if (class_exists('\Elementor\Widget_Base')) {
-            new ElementorWidgetInstantior();
-        }
+        class_exists('\Elementor\Widget_Base') ? new ElementorWidgetInstantior() : null;
     }
 
     public static function render(string $template, array $context = []): string|null
