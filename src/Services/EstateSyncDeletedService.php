@@ -6,20 +6,21 @@ use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Enum\PostType;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
+use ADB\ImmoSyncWhise\Services\Contracts\ServiceContract;
 use Illuminate\Support\Collection;
 use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 
-class EstateSyncDeletedService
+class EstateSyncDeletedService implements ServiceContract
 {
     public function __construct(
         private Estate $estate,
         private EstateAdapter $estateAdapter,
         private EstateParser $estateParser,
-        public LoggerInterface $logger,
+        public  LoggerInterface $logger,
     ) {
     }
 
-    public function sync(): void
+    public function run(): void
     {
         \WP_CLI::success("Performing daily deletion check");
         $this->logger->info("Performing daily deletion check");

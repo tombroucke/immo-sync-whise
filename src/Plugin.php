@@ -5,10 +5,10 @@ namespace ADB\ImmoSyncWhise;
 use ADB\ImmoSyncWhise\Admin\CPT\EstateCPT;
 use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Command\CommandRegistrar;
-use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Integrations\Elementor\ElementorWidgetInstantior;
+use Illuminate\Container\Container;
 
-class Plugin
+class Plugin extends Container
 {
     public function __construct(private array $modules = [])
     {
@@ -17,22 +17,18 @@ class Plugin
 
     public function initModules(): void
     {
-        $container = Container::getInstance();
-
         $this->modules = [
-            new CommandRegistrar($container),
+            new CommandRegistrar($this),
             new Settings(),
             new EstateCPT(),
         ];
 
-        add_action('elementor/init', [$this, 'register_immo_sync_whise_elementor_widgets']);
+        add_action('elementor/init', [$this, 'initElementor']);
     }
 
-    public function register_immo_sync_whise_elementor_widgets()
+    public function initElementor()
     {
-        if (class_exists('\Elementor\Widget_Base')) {
-            new ElementorWidgetInstantior();
-        }
+        class_exists('\Elementor\Widget_Base') ? new ElementorWidgetInstantior() : null;
     }
 
     public static function render(string $template, array $context = []): string|null

@@ -20,10 +20,10 @@
     "require": {
         "fw4/whise-api": "^1.5",
         "monolog/monolog": "^3.3",
-        "league/container": "^4.2",
         "illuminate/collections": "^10.0",
         "guzzlehttp/guzzle": "^7.0",
-        "guzzlehttp/promises": "^2.0"
+        "guzzlehttp/promises": "^2.0",
+        "illuminate/container": "^10.32"
     },
     "extra": {
         "mozart": {

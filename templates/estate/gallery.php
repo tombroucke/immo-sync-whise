@@ -1,13 +1,11 @@
 <?php
 
-use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Model\Estate;
+use Illuminate\Container\Container;
 
 global $post;
 
-$operationsLogger = Container::getInstance()->get('operations');
-
-$estate = (new Estate($operationsLogger))->get_estate($post->ID);
+$estate = Container::getInstance()->make(Estate::class)->get_estate($post->ID);
 
 ?>
 <div id="product_images_container">

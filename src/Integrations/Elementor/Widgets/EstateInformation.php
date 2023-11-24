@@ -2,9 +2,9 @@
 
 namespace ADB\ImmoSyncWhise\Integrations\Elementor\Widgets;
 
-use ADB\ImmoSyncWhise\Container;
 use ADB\ImmoSyncWhise\Matchers\EstateMatcher;
 use ADB\ImmoSyncWhise\Model\Estate;
+use Illuminate\Container\Container;
 
 class EstateInformation extends \Elementor\Widget_Base
 {
@@ -33,8 +33,9 @@ class EstateInformation extends \Elementor\Widget_Base
         if (is_singular('estate')) {
             global $post;
 
-            $fields = Container::getInstance()->get(Estate::class)->getMetaFields($post->ID);
-            $matcher = new EstateMatcher();
+            $estate = Container::getInstance()->make(Estate::class);
+            $matcher = Container::getInstance()->make(EstateMatcher::class);
+            $fields = $estate->getMetaFields($post->ID);
 
             if (!empty($fields)) {
                 echo '<div class="information_wrapper">';
@@ -62,5 +63,3 @@ class EstateInformation extends \Elementor\Widget_Base
 <?php
     }
 }
-
-\Elementor\Plugin::instance()->widgets_manager->register(new EstateInformation());

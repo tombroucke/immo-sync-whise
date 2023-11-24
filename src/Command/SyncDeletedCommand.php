@@ -20,6 +20,6 @@ class SyncDeletedCommand implements CommandContract
      */
     public function handle(): void
     {
-        $this->estateSyncDeletedService->sync();
+        $this->estateSyncDeletedService->run();
     }
 }

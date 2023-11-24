@@ -6,8 +6,9 @@ use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Services\Contracts\ServiceContract;
 
-class EstateFetchService
+class EstateFetchService implements ServiceContract
 {
     public function __construct(
         private Estate $estate,
@@ -17,7 +18,7 @@ class EstateFetchService
     ) {
     }
 
-    public function fetchAll(): void
+    public function run(): void
     {
         \WP_CLI::line("Fetching all estates from Whise API");
         $this->logger->info("Fetching all estates from Whise API");
@@ -31,7 +32,7 @@ class EstateFetchService
 
             $this->estateParser->parseProperties();
             $this->estateParser->parseDetails();
-            $this->estateParser->parsePictures();
+            $this->estateParser->parsePictures("urlSmall");
 
             \WP_CLI::success("Fetched estate, created estate with post ID #{$postId}");
             $this->logger->info("Fetched estate, created estate with post ID #{$postId}");

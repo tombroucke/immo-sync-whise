@@ -6,8 +6,9 @@ use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Services\Contracts\ServiceContract;
 
-class EstateSyncTodayService
+class EstateSyncTodayService implements ServiceContract
 {
     public function __construct(
         private Estate $estate,
@@ -17,7 +18,7 @@ class EstateSyncTodayService
     ) {
     }
 
-    public function sync(): void
+    public function run(): void
     {
         $yesterday = date("Y-m-d H:i:s", strtotime("yesterday"));
 
@@ -54,7 +55,7 @@ class EstateSyncTodayService
         // Parse the response object
         $this->estateParser->parseProperties();
         $this->estateParser->parseDetails();
-        $this->estateParser->parsePictures();
+        $this->estateParser->parsePictures("urlSmall");
 
         \WP_CLI::success("Imported estate, created estate with post ID {$postId}");
         $this->logger->info("Imported estate, created estate with post ID  {$postId}");
@@ -75,7 +76,7 @@ class EstateSyncTodayService
         $this->estateParser->removeDetails();
         $this->estateParser->parseDetails();
         $this->estateParser->removePictures();
-        $this->estateParser->parsePictures();
+        $this->estateParser->parsePictures("urlSmall");
 
         \WP_CLI::success("Synced estate, updated estate with post ID  {$postId}");
         $this->logger->info("Synced estate, updated estate with post ID  {$postId}");
