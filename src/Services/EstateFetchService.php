@@ -18,7 +18,7 @@ class EstateFetchService implements ServiceContract
     ) {
     }
 
-    public function run(): void
+    public function run($args, $assocArgs): void
     {
         \WP_CLI::line("Fetching all estates from Whise API");
         $this->logger->info("Fetching all estates from Whise API");
@@ -32,11 +32,13 @@ class EstateFetchService implements ServiceContract
 
             $this->estateParser->parseProperties();
             $this->estateParser->parseDetails();
-            $this->estateParser->parsePictures("urlSmall");
+            $this->estateParser->parsePictures("urlXXL");
 
             \WP_CLI::success("Fetched estate, created estate with post ID #{$postId}");
             $this->logger->info("Fetched estate, created estate with post ID #{$postId}");
         }
+
+        do_action('iws_after_fetch_estates', $estates);
 
         \WP_CLI::success('Fetching successful');
         $this->logger->info("Fetching successful");

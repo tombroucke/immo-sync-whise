@@ -21,11 +21,11 @@ use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Api;
 use ADB\ImmoSyncWhise\Database\CreateDetailsTable;
 use ADB\ImmoSyncWhise\Plugin;
-use Monolog\Handler\StreamHandler;
-use Monolog\Level;
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
-use Whise\Api\WhiseApi;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Handler\StreamHandler;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Level;
+use ADB\ImmoSyncWhise\Vendor\Monolog\Logger;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Whise\Api\WhiseApi;
 
 define('ISW_VERSION', fileatime(__DIR__));
 define('ISW_PATH', __DIR__);

@@ -8,7 +8,7 @@ use ADB\ImmoSyncWhise\Parser\EstateParser;
 use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 use ADB\ImmoSyncWhise\Services\Contracts\ServiceContract;
 
-class EstateSyncTodayService implements ServiceContract
+class EstateSyncService implements ServiceContract
 {
     public function __construct(
         private Estate $estate,
@@ -18,17 +18,20 @@ class EstateSyncTodayService implements ServiceContract
     ) {
     }
 
-    public function run(): void
+    public function run($args, $assocArgs): void
     {
-        $yesterday = date("Y-m-d H:i:s", strtotime("yesterday"));
+        $since = date("Y-m-d H:i:s", strtotime("yesterday"));
+        if (isset($assocArgs['since'])) {
+            $since = date("Y-m-d H:i:s", strtotime($assocArgs['since']));
+        }
 
-        \WP_CLI::log("Syncing all estates which have been added or edited since: {$yesterday}");
-        $this->logger->info("Syncing all estates which have been added or edited since: {$yesterday}");
+        \WP_CLI::log("Syncing all estates which have been added or edited since: {$since}");
+        $this->logger->info("Syncing all estates which have been added or edited since: {$since}");
 
         $estates = $this->estateAdapter->list([
             'LanguageId' => $_ENV['LANG'],
             'UpdateDateTimeRange' => [
-                'Min' => $yesterday
+                'Min' => $since
             ]
         ]);
 
@@ -37,6 +40,8 @@ class EstateSyncTodayService implements ServiceContract
             // $this->logger->warning(json_encode($estate->getData()['name']));
             // $this->logger->warning(json_encode($estate->getData()['updateDateTime']));
         }
+
+        do_action('iws_after_sync_estates', $estates);
 
         \WP_CLI::success('Syncing successful');
         $this->logger->info("Syncing successful");
@@ -55,7 +60,7 @@ class EstateSyncTodayService implements ServiceContract
         // Parse the response object
         $this->estateParser->parseProperties();
         $this->estateParser->parseDetails();
-        $this->estateParser->parsePictures("urlSmall");
+        $this->estateParser->parsePictures("urlXXL");
 
         \WP_CLI::success("Imported estate, created estate with post ID {$postId}");
         $this->logger->info("Imported estate, created estate with post ID  {$postId}");
@@ -76,7 +81,7 @@ class EstateSyncTodayService implements ServiceContract
         $this->estateParser->removeDetails();
         $this->estateParser->parseDetails();
         $this->estateParser->removePictures();
-        $this->estateParser->parsePictures("urlSmall");
+        $this->estateParser->parsePictures("urlXXL");
 
         \WP_CLI::success("Synced estate, updated estate with post ID  {$postId}");
         $this->logger->info("Synced estate, updated estate with post ID  {$postId}");

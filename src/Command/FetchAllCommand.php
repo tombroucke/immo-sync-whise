@@ -18,7 +18,7 @@ class FetchAllCommand implements CommandContract
      * 
      * wp iws fetch-all handle
      */
-    public function handle(): void
+    public function handle($args, $assocArgs): void
     {
         $this->estateFetchService->run();
     }

@@ -6,7 +6,7 @@ use ADB\ImmoSyncWhise\Adapter\EstateAdapter;
 use ADB\ImmoSyncWhise\Model\Estate;
 use ADB\ImmoSyncWhise\Parser\EstateParser;
 use ADB\ImmoSyncWhise\Services\Contracts\ServiceContract;
-use Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 
 class TestService implements ServiceContract
 {
@@ -18,7 +18,7 @@ class TestService implements ServiceContract
     ) {
     }
 
-    public function run(): void
+    public function run($args, $assocArgs): void
     {
         \WP_CLI::log("Running TestCommand");
         $this->logger->info("Running TestCommand");

@@ -18,7 +18,7 @@ class TestCommand implements CommandContract
      *
      * wp iws test handle
      */
-    public function handle(): void
+    public function handle($args, $assocArgs): void
     {
         $this->testService->run();
     }

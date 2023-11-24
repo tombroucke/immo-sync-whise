@@ -4,5 +4,5 @@ namespace ADB\ImmoSyncWhise\Services\Contracts;
 
 interface ServiceContract
 {
-    public function run(): void;
+    public function run($args, $assocArgs): void;
 }

@@ -20,7 +20,7 @@ class EstateSyncDeletedService implements ServiceContract
     ) {
     }
 
-    public function run(): void
+    public function run($args, $assocArgs): void
     {
         \WP_CLI::success("Performing daily deletion check");
         $this->logger->info("Performing daily deletion check");
@@ -48,6 +48,8 @@ class EstateSyncDeletedService implements ServiceContract
         }
 
         $deleted = json_encode($deletedIds);
+
+        do_action('iws_after_delete_estates', $deleted);
 
         \WP_CLI::success("Succesfully deleted estates {$deleted}");
         $this->logger->info("Succesfully deleted estates {$deleted}");

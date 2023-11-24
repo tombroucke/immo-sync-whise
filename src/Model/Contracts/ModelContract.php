@@ -2,7 +2,7 @@
 
 namespace ADB\ImmoSyncWhise\Model\Contracts;
 
-use Psr\Log\LoggerInterface;
+use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
 
 interface ModelContract
 {

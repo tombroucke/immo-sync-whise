@@ -18,7 +18,7 @@ class SyncDeletedCommand implements CommandContract
      *
      * wp iws sync-deleted handle
      */
-    public function handle(): void
+    public function handle($args, $assocArgs): void
     {
         $this->estateSyncDeletedService->run();
     }

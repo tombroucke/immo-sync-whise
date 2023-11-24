@@ -14,7 +14,7 @@ class EstateCPT
         add_action('admin_enqueue_scripts',             [$this, 'admin_scripts']);
         add_action('add_meta_boxes_' . PostType::Name,  [$this, 'estate_add_meta_boxes']);
         add_filter('manage_posts_columns',              [$this, 'featured_image_column']);
-        add_action('manage_posts_custom_column',        [$this, 'featured_image_column_data'], 10, 2);
+        add_action('manage_estate_posts_custom_column', [$this, 'featured_image_column_data'], 10, 2);
         add_action('admin_head',                        [$this, 'columns_css']);
         add_action('wp_ajax_toggle_show_field',         [$this, 'toggle_show_field_callback']);
         add_action('wp_ajax_nopriv_toggle_show_field',  [$this, 'toggle_show_field_callback']);
@@ -109,7 +109,6 @@ class EstateCPT
             'title' => 'Title',
             'date' => 'Date'
         );
-
         return $columns;
     }
 

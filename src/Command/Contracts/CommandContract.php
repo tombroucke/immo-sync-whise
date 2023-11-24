@@ -4,5 +4,5 @@ namespace ADB\ImmoSyncWhise\Command\Contracts;
 
 interface CommandContract
 {
-    public function handle(): void;
+    public function handle($args, $assocArgs): void;
 }
