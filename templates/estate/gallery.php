@@ -1,7 +1,7 @@
 <?php
 
 use ADB\ImmoSyncWhise\Model\Estate;
-use Illuminate\Container\Container;
+use ADB\ImmoSyncWhise\Vendor\Illuminate\Container\Container;
 
 global $post;
 

@@ -4,9 +4,10 @@ namespace ADB\ImmoSyncWhise;
 
 use ADB\ImmoSyncWhise\Admin\CPT\EstateCPT;
 use ADB\ImmoSyncWhise\Admin\Settings;
+use ADB\ImmoSyncWhise\Frontend\Contacts;
 use ADB\ImmoSyncWhise\Command\CommandRegistrar;
 use ADB\ImmoSyncWhise\Integrations\Elementor\ElementorWidgetInstantior;
-use Illuminate\Container\Container;
+use ADB\ImmoSyncWhise\Vendor\Illuminate\Container\Container;
 
 class Plugin extends Container
 {
@@ -21,6 +22,7 @@ class Plugin extends Container
             new CommandRegistrar($this),
             new Settings(),
             new EstateCPT(),
+            new Contacts($this),
         ];
 
         add_action('elementor/init', [$this, 'initElementor']);

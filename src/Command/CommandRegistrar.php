@@ -9,7 +9,7 @@ use ADB\ImmoSyncWhise\Services\EstateFetchService;
 use ADB\ImmoSyncWhise\Services\EstateSyncDeletedService;
 use ADB\ImmoSyncWhise\Services\EstateSyncService;
 use ADB\ImmoSyncWhise\Services\TestService;
-use Illuminate\Container\Container;
+use ADB\ImmoSyncWhise\Vendor\Illuminate\Container\Container;
 
 class CommandRegistrar
 {

@@ -1,0 +1,5 @@
+<?php foreach ($notices as $notice) : ?>
+    <div class="notice notice-<?= $notice['type']; ?> is-dismissible">
+        <p><?= $notice['message']; ?></p>
+    </div>
+<?php endforeach; ?>

@@ -54,6 +54,7 @@ class Settings
                         'type' => 'text',
                         'name' => static::getOptionName('whise_user'),
                         'value' => static::getOptionValue('whise_user'),
+                        'disabled' => static::findSettingValue('whise_password'),
                     ],
                     'args' => $args,
                     'description' => __('The username or email address used to authenticate with the Whise API.', 'immo-sync-whise'),
@@ -76,6 +77,7 @@ class Settings
                         'type' => 'password',
                         'name' => static::getOptionName('whise_password'),
                         'value' => static::getOptionValue('whise_password'),
+                        'disabled' => static::findSettingValue('whise_password'),
                     ],
                     'args' => $args,
                     'description' => __('The password used to authenticate with the Whise API.', 'immo-sync-whise'),
@@ -92,19 +94,26 @@ class Settings
 
     public static function getSettings()
     {
-        return wp_parse_args(
+        $settings = wp_parse_args(
             get_option(self::OPTION_NAME),
             [
+                'whise_user' => '',
+                'whise_password' => '',
                 'api_token' => '',
                 'test_api_token' => '',
             ]
         );
+        foreach ($settings as $key => $value) {
+            $settings[$key] = self::findSettingValue($key) ?? $value;
+        }
+        ray($settings);
+        return $settings;
     }
 
     public static function getSetting($setting)
     {
         $settings = static::getSettings();
-
+        
         return $settings[$setting] ?? null;
     }
 
@@ -123,5 +132,26 @@ class Settings
                 echo Plugin::render('settings', []);
             }
         );
+    }
+
+    /**
+     * Find the setting in WP config, server or env
+     *
+     * @return string|null
+     */
+    public static function findSettingValue(string $optionName) : ?string
+    {
+        $optionName = strtoupper($optionName);
+        if (defined($optionName)) {
+            return constant($optionName);
+        }
+        if (isset($_SERVER[$optionName])) {
+            return $_SERVER[$optionName];
+        }
+        if (isset($_ENV[$optionName])) {
+            return $_ENV[$optionName];
+        }
+        
+        return null;
     }
 }

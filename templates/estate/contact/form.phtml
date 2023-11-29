@@ -1,0 +1,21 @@
+<form id="whise-contact-form" action="<?= $adminPostUrl; ?>" method="POST">
+    <?php include 'notices.phtml'; ?>
+    <div class="form-group mb-3">
+        <label class="form-check-label" for="first_name"><?= __('First name', 'immo-sync-whise'); ?></label>
+        <input type="text" class="form-control" name="first_name" required />
+    </div>
+    <div class="form-group mb-3">
+        <label class="form-check-label" for="last_name"><?= __('Last name', 'immo-sync-whise'); ?></label>
+        <input type="text" class="form-control" name="last_name" required />
+    </div>
+    <div class="form-group mb-3">
+        <label class="form-check-label" for="email"><?= __('E-mailaddress', 'immo-sync-whise'); ?></label>
+        <input type="email" class="form-control" name="email" required />
+    </div>
+    <input type="hidden" name="office_id" value="<?= $officeId; ?>" />
+    <input type="hidden" name="estate_id" value="<?= $estateId; ?>" />
+    <input type="hidden" name="whise_estate_id" value="<?= $whiseEstateId; ?>" />
+    <input type="hidden" name="action" value="add_whise_contact"/>
+    <?php wp_nonce_field('whise_create_contact', 'whise_create_contact_nonce', true, true); ?>
+    <button type="submit" class="btn btn-primary"><?= __('Submit', 'immo-sync-whise'); ?></button>
+</form>

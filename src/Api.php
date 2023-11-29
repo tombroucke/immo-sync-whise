@@ -15,7 +15,10 @@ class Api
         $this->connection = $connection;
 
         try {
-            if ($this->areWhiseCredentialsSet() === false) {
+            if (
+                empty($whiseUser) ||
+                empty($whisePassword)
+            ) {
                 throw new CredentialsNotSetException;
             }
 
@@ -51,11 +54,6 @@ class Api
                 ?>
             </p>
         </div>
-<?php
-    }
-
-    private function areWhiseCredentialsSet(): bool
-    {
-        return !empty(get_option('isw_options')['whise_user']) && !empty(get_option('isw_options')['whise_password']);
+    <?php
     }
 }

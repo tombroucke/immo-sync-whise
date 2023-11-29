@@ -4,7 +4,7 @@
  * @var array $atts
  */
 ?>
-<input name="<?= $atts['name'] ?>" id="<?= $args['label_for'] ?>" type="<?= $atts['type'] ?? 'text' ?>" class="regular-text <?= $atts['class'] ?? '' ?>" value="<?php echo esc_attr($atts['value'] ?? ''); ?>" placeholder="<?= $atts['placeholder'] ?? '' ?>" />
+<input name="<?= $atts['name'] ?>" id="<?= $args['label_for'] ?>" type="<?= $atts['type'] ?? 'text' ?>" class="regular-text <?= $atts['class'] ?? '' ?>" value="<?php echo esc_attr($atts['value'] ?? ''); ?>" placeholder="<?= $atts['placeholder'] ?? '' ?>" <?= disabled(isset($atts['disabled']) && $atts['disabled']); ?> />
 <?php if (isset($description)) : ?>
     <p class="description"><?= esc_html($description) ?></p>
 <?php endif; ?>
