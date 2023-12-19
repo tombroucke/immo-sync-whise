@@ -20,6 +20,6 @@ class FetchAllCommand implements CommandContract
      */
     public function handle($args, $assocArgs): void
     {
-        $this->estateFetchService->run();
+        $this->estateFetchService->run($args, $assocArgs);
     }
 }

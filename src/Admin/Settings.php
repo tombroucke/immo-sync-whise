@@ -54,7 +54,7 @@ class Settings
                         'type' => 'text',
                         'name' => static::getOptionName('whise_user'),
                         'value' => static::getOptionValue('whise_user'),
-                        'disabled' => static::findSettingValue('whise_password'),
+                        'disabled' => static::findSettingValue('whise_user'),
                     ],
                     'args' => $args,
                     'description' => __('The username or email address used to authenticate with the Whise API.', 'immo-sync-whise'),
@@ -90,6 +90,29 @@ class Settings
                 'label_for' => 'whise_password',
             ]
         );
+
+        add_settings_field(
+            'whise_client_id',
+            __('WHISE Client ID', 'immo-sync-whise'),
+            static function ($args) {
+                echo Plugin::render('settings/field/input', [
+                    'atts' => [
+                        'type' => 'text',
+                        'name' => static::getOptionName('whise_client_id'),
+                        'value' => static::getOptionValue('whise_client_id'),
+                        'disabled' => static::findSettingValue('whise_client_id'),
+                    ],
+                    'args' => $args,
+                    'description' => __('The client ID to show estates from', 'immo-sync-whise'),
+                ]);
+            },
+            self::PAGE_SLUG,
+            'iws_api_creds',
+            [
+                'class' => 'wporg_row',
+                'label_for' => 'whise_client_id',
+            ]
+        );
     }
 
     public static function getSettings()
@@ -99,6 +122,7 @@ class Settings
             [
                 'whise_user' => '',
                 'whise_password' => '',
+                'whise_client_id' => '',
                 'api_token' => '',
                 'test_api_token' => '',
             ]
@@ -106,7 +130,6 @@ class Settings
         foreach ($settings as $key => $value) {
             $settings[$key] = self::findSettingValue($key) ?? $value;
         }
-        ray($settings);
         return $settings;
     }
 

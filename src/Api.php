@@ -10,7 +10,7 @@ class Api
 {
     public WhiseApi $connection;
 
-    public function __construct(WhiseApi $connection, string $whiseUser, string $whisePassword)
+    public function __construct(WhiseApi $connection, string $whiseUser, string $whisePassword, int $clientId = null)
     {
         $this->connection = $connection;
 
@@ -23,8 +23,12 @@ class Api
             }
 
             $accessToken = $this->connection->requestAccessToken($whiseUser, $whisePassword);
-
             $this->connection->setAccessToken($accessToken);
+
+            if ($clientId) {
+                $clientToken = $this->connection->requestClientToken($clientId);
+                $this->connection->setAccessToken($clientToken);
+            }
         } catch (AuthException $e) {
             add_action('admin_notices', [$this, 'unauthorizedMessage']);
         } catch (CredentialsNotSetException $e) {

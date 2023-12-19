@@ -60,7 +60,7 @@ add_action('immo_sync_whise', function ($immo_sync_whise) {
     });
 
     $immo_sync_whise->bind(Api::class, function ($immo_sync_whise, $args) {
-        return new Api(connection: new WhiseApi(), whiseUser: Settings::getSetting('whise_user'), whisePassword: Settings::getSetting('whise_password'));
+        return new Api(connection: new WhiseApi(), whiseUser: Settings::getSetting('whise_user'), whisePassword: Settings::getSetting('whise_password'), clientId: Settings::getSetting('whise_client_id'));
     });
 });
 

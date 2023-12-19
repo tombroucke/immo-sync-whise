@@ -8,7 +8,7 @@ use ADB\ImmoSyncWhise\Vendor\GuzzleHttp\Promise as P;
 use ADB\ImmoSyncWhise\Vendor\GuzzleHttp\Promise\PromiseInterface;
 use ADB\ImmoSyncWhise\Vendor\Psr\Http\Message\RequestInterface;
 use ADB\ImmoSyncWhise\Vendor\Psr\Http\Message\ResponseInterface;
-use ADB\ImmoSyncWhise\Vendor\Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Functions used to create and wrap handlers with handler middleware.
